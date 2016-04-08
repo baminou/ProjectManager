@@ -1,0 +1,20 @@
+port=2003
+
+username=epi_admin
+password=hj2AD$$A4d
+archive_drive=/mnt/dell/apetronis
+scratch_drive=/EPIGENETICS/SCRATCH/
+archive_directory=SBS_USER
+scratch_directory=SBS_USER
+
+project_pattern=[A-Z]{1}[a-zA-Z]+_[1-9][0-9][0-9][0-9]_[0-9][0-9][0-9]
+project_pattern_title=[A-Z]{1}[a-zA-Z]+
+project_convention=ProjectName_year_version
+
+subproject_pattern=(19|20)\\d{2}(0?[1-9]|1[012])(0?[1-9]|[1|2]?[0-9]|3?[0-1])(_[A-Z]{1}[a-zA-Z0-9]+){4}
+subproject_convention=YYYYMMDD_ProjectName_ExperimentTitle_Species_Description
+
+subproject_convention=YYYYMMDD_ProjectName_ExperimentTitle_Species_Description
+support_name=Brice Aminou
+support_email=Brice.Aminou@camh.ca
+support_extension=33866

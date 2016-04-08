@@ -1,0 +1,82 @@
+package view;
+
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import epi.JTextFieldNoSymbol;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.Font;
+
+public class CreateProjectView extends JPanel {
+
+	final private JTextField _projectNameTxtField = new JTextFieldNoSymbol();
+	final private JComboBox<Integer> _versionComboBox = new JComboBox<Integer>();
+	final private JLabel _projectNameLbl = new JLabel("Name");
+	final private JLabel _versionLbl = new JLabel("Version");
+	private final JLabel _fullNameLbl = new JLabel("Full Name");
+	
+	public CreateProjectView(){
+		for(int i=1;i<100;i++) _versionComboBox.addItem(new Integer(i));
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{50, 250, 0};
+		gridBagLayout.rowHeights = new int[]{32, 0, 0, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
+		
+		GridBagConstraints gbc__projectNameLbl = new GridBagConstraints();
+		gbc__projectNameLbl.anchor = GridBagConstraints.EAST;
+		gbc__projectNameLbl.fill = GridBagConstraints.VERTICAL;
+		gbc__projectNameLbl.insets = new Insets(0, 0, 5, 5);
+		gbc__projectNameLbl.gridx = 0;
+		gbc__projectNameLbl.gridy = 0;
+		this.add(_projectNameLbl, gbc__projectNameLbl);
+		GridBagConstraints gbc__projectNameTxtField = new GridBagConstraints();
+		gbc__projectNameTxtField.fill = GridBagConstraints.BOTH;
+		gbc__projectNameTxtField.insets = new Insets(0, 0, 5, 0);
+		gbc__projectNameTxtField.gridx = 1;
+		gbc__projectNameTxtField.gridy = 0;
+		_projectNameTxtField.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
+		this.add(_projectNameTxtField, gbc__projectNameTxtField);
+		GridBagConstraints gbc__versionLbl = new GridBagConstraints();
+		gbc__versionLbl.anchor = GridBagConstraints.EAST;
+		gbc__versionLbl.fill = GridBagConstraints.VERTICAL;
+		gbc__versionLbl.insets = new Insets(0, 0, 5, 5);
+		gbc__versionLbl.gridx = 0;
+		gbc__versionLbl.gridy = 1;
+		this.add(_versionLbl, gbc__versionLbl);
+		GridBagConstraints gbc__boxComboBox = new GridBagConstraints();
+		gbc__boxComboBox.insets = new Insets(0, 0, 5, 0);
+		gbc__boxComboBox.fill = GridBagConstraints.BOTH;
+		gbc__boxComboBox.gridx = 1;
+		gbc__boxComboBox.gridy = 1;
+		this.add(_versionComboBox, gbc__boxComboBox);
+		
+		GridBagConstraints gbc__fullNameLbl = new GridBagConstraints();
+		gbc__fullNameLbl.insets = new Insets(0, 0, 0, 5);
+		gbc__fullNameLbl.gridx = 0;
+		gbc__fullNameLbl.gridy = 2;
+		add(_fullNameLbl, gbc__fullNameLbl);
+
+	}
+
+	public JTextField get_projectNameTxtField() {
+		return _projectNameTxtField;
+	}
+
+	public JComboBox<Integer> get_versionComboBox() {
+		return _versionComboBox;
+	}
+
+	public JLabel get_projectNameLbl() {
+		return _projectNameLbl;
+	}
+
+	public JLabel get_versionLbl() {
+		return _versionLbl;
+	}
+
+}

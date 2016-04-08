@@ -1,0 +1,37 @@
+package model;
+
+public abstract class SpecificProjectModel {
+	protected String _growthProtocol;
+	protected String _treatmentProtocol;
+	protected String _extractProtocol;
+	protected String _dataProcessing;
+	
+	
+	
+	public String get_growthProtocol() {
+		return _growthProtocol;
+	}
+	public void set_growthProtocol(String _growthProtocol) {
+		this._growthProtocol = _growthProtocol;
+	}
+	public String get_treatmentProtocol() {
+		return _treatmentProtocol;
+	}
+	public void set_treatmentProtocol(String _treatmentProtocol) {
+		this._treatmentProtocol = _treatmentProtocol;
+	}
+	public String get_extractProtocol() {
+		return _extractProtocol;
+	}
+	public void set_extractProtocol(String _extractProtocol) {
+		this._extractProtocol = _extractProtocol;
+	}
+	public String get_dataProcessing() {
+		return _dataProcessing;
+	}
+	public void set_dataProcessing(String _dataProcessing) {
+		this._dataProcessing = _dataProcessing;
+	}
+	
+	
+}

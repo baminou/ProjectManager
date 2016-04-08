@@ -1,0 +1,38 @@
+package model;
+
+import java.io.IOException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+
+import app.ConventionException;
+import app.Project;
+import epi.ServerInterface;
+
+public class CreateProjectModel {
+	
+	private static CreateProjectModel instance = null;
+	
+	private CreateProjectModel(){
+		
+	}
+	
+	public static CreateProjectModel getInstance(){
+		if(instance == null){
+			instance = new CreateProjectModel();
+		}
+		return instance;
+	}
+	
+	/**
+	 * Send a project to the server
+	 * @param project					The project to send
+	 * @throws NotBoundException 		The project is not bounded to rmi
+	 * @throws IOException 				The project folder cannot me created. mkdir failed
+	 * @throws ConventionException 		The convention is not respected
+	 * @throws RemoteException 			The server is not reachable
+	 */
+	public void create_project(Project project) throws RemoteException, ConventionException, IOException, NotBoundException{
+		return ServerInterface.getInstance().get_stub().createProjectFolder(project);
+	}
+
+}

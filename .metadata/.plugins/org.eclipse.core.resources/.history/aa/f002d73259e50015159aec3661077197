@@ -1,0 +1,49 @@
+package view;
+
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
+import java.awt.BorderLayout;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.ScrollPaneConstants;
+
+public class SyncView extends JPanel {
+	
+	private final JTree _scratchTree = new JTree();
+	private final JPanel _leftPanel = new JPanel();
+	private final JScrollPane _scratchTreeScrollPane = new JScrollPane(_scratchTree);
+	
+	public SyncView() {
+		setLayout(new BorderLayout(0, 0));
+		_scratchTree.setRootVisible(false);
+		_scratchTree.setShowsRootHandles(true);
+		
+		_scratchTree.setModel(new DefaultTreeModel(
+			new DefaultMutableTreeNode("JTree") {
+				{
+				}
+			}
+		));
+		
+		
+		add(_leftPanel);
+		_leftPanel.setLayout(new BorderLayout(0, 0));
+		//_scratchTreeScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		//_scratchTreeScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		_leftPanel.add(new JScrollPane(_scratchTree), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	}
+
+	public JTree get_scratchTree() {
+		return _scratchTree;
+	}
+
+	public JPanel get_leftPanel() {
+		return _leftPanel;
+	}
+
+	public JScrollPane get_scratchTreeScrollPane() {
+		return _scratchTreeScrollPane;
+	}
+
+}

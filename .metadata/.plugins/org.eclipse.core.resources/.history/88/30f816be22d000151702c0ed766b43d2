@@ -1,0 +1,10 @@
+package controller;
+
+import model.SelectExistingProjectModel;
+
+public class SelectExistingProjectController {
+	
+	private SelectExistingProjectModel _model;
+	private SelectExistingProjectView _view;
+
+}

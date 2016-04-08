@@ -1,0 +1,105 @@
+package view;
+
+import javax.swing.JPanel;
+
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.factories.FormFactory;
+
+import epi.JTextFieldNoSymbol;
+
+import javax.swing.AbstractListModel;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+
+import java.awt.Dimension;
+
+import javax.swing.border.EmptyBorder;
+
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.BorderLayout;
+import java.util.Vector;
+
+import javax.swing.JButton;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+
+public class GeneralInfoView extends JPanel {
+	private final JLabel _titleLbl = new JLabel("Title");
+	private final JTextField _titleTxtField = new JTextField();
+	
+	private JPanel _panel = new JPanel();
+
+	public GeneralInfoView() {
+		setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		setBackground(new Color(169, 169, 169));
+		setLayout(new BorderLayout(0, 0));
+		
+		_panel.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(30dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(28dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,}));
+		
+		_panel.add(_titleLbl, "2, 2, right, default");
+		_panel.add(InfoFields.get_instance().get_titleTxtField(), "4, 2, fill, default");
+		_panel.add(InfoFields.get_instance().get_speciesLbl(), "2, 4, right, default");
+		_panel.add(InfoFields.get_instance().get_speciesComboBox(), "4, 4, center, default");
+		_panel.add(InfoFields.get_instance().get_descriptionLbl(), "2, 6, right, default");
+		_panel.add(InfoFields.get_instance().get_descriptionTxtField(), "4, 6, fill, default");
+		_panel.add(InfoFields.get_instance().get_summaryLbl(), "2, 8, right, default");
+		_panel.add(InfoFields.get_instance().get_summaryScrollPane(), "4, 8, fill, fill");
+		_panel.add(InfoFields.get_instance().get_overallDesignLbl(), "2, 10, right, default");
+		_panel.add(InfoFields.get_instance().get_overallDesignScrollPane(), "4, 10, fill, fill");
+		_panel.add(InfoFields.get_instance().get_contributorLbl(), "2, 12, right, default");
+		_panel.add(InfoFields.get_instance().get_contributorTxtField(), "4, 12, fill, default");
+		_panel.add(InfoFields.get_instance().get_experimentLbl(), "2, 14, right, default");
+		_panel.add(new JScrollPane(InfoFields.get_instance().get_experimentList()), "4, 14");
+		
+		//add(InfoFields.get_instance().get_creationPanel(), BorderLayout.NORTH);
+		add(_panel, BorderLayout.CENTER);
+		//add(InfoFields.get_instance().get_experimentNameLbl(), BorderLayout.SOUTH);
+	}
+	
+	private void _initTips(){
+		/*this._titleTxtField.setToolTipText("Provide a unique title that describes the overall study.");
+		this._titleLbl.setToolTipText("Provide a unique title that describes the overall study.");
+		this._speciesComboBox.setToolTipText("Select the corresponding species for the experiment.");
+		this._speciesLbl.setToolTipText("Select the corresponding species for the experiment.");
+		this._descriptionTxtField.setToolTipText("Enter 2-3 words describing the content of the folder. Ex: Blood Sample.");
+		this._descriptionLbl.setToolTipText("Enter 2-3 words describing the content of the folder. Ex: Blood Sample.");
+		this._summaryTextArea.setToolTipText("Provide a thorough description of the goals and objectives of this study. The abstract from the associated publication may be suitable. Multiple summary lines can be included.");
+		this._summaryLbl.setToolTipText("Provide a thorough description of the goals and objectives of this study. The abstract from the associated publication may be suitable. Multiple summary lines can be included.");
+		this._overallDesignTxtArea.setToolTipText("Provide a description of the experimental design.Indicate how many Samples are analyzed, if replicates are included, are there control and/or reference Samples, dye-swaps, etc... Multiple lines can be included.");
+		this._overallDesignLbl.setToolTipText("Provide a description of the experimental design.Indicate how many Samples are analyzed, if replicates are included, are there control and/or reference Samples, dye-swaps, etc... Multiple lines can be included.");
+		this._contributorTxtField.setToolTipText("Enter the name of all contributors separated by semicolon. Ex. Spider Man;Super Man;Spongebob SquarePants.");
+		this._contributorLbl.setToolTipText("Enter the name of all contributors separated by semicolon. Ex. Spider Man;Super Man;Spongebob SquarePants.");*/
+	}
+}

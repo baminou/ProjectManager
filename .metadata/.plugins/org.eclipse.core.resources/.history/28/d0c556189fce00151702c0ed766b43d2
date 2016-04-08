@@ -1,0 +1,99 @@
+package view;
+
+import javax.swing.JPanel;
+
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.factories.FormFactory;
+
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+public class ServerView extends JPanel {
+	final private JTextField _ipTxtField = new JTextField();
+	final private JLabel _ipLbl = new JLabel("IP");
+	private JLabel _scratchLbl;
+	private JLabel _archiveLbl;
+	private JTextField _archiveTxtField;
+	private JTextField _scratchTxtField;
+	
+	public ServerView() {
+		setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,}));
+		
+		add(_ipLbl, "2, 2, right, default");
+		add(_ipTxtField, "4, 2, fill, default");
+		_ipTxtField.setColumns(10);
+		_scratchLbl = new JLabel("Scratch");
+		add(_scratchLbl, "2, 6, right, default");
+		
+		_scratchTxtField = new JTextField();
+		_scratchTxtField.setEditable(false);
+		add(_scratchTxtField, "4, 6, fill, default");
+		_scratchTxtField.setColumns(10);
+		
+		_archiveLbl = new JLabel("Archive");
+		add(_archiveLbl, "2, 8, right, default");
+		
+		_archiveTxtField = new JTextField();
+		_archiveTxtField.setEditable(false);
+		add(_archiveTxtField, "4, 8, fill, default");
+		_archiveTxtField.setColumns(10);
+
+	}
+
+	public JLabel get_scratchLbl() {
+		return _scratchLbl;
+	}
+
+	public void set_scratchLbl(JLabel _scratchLbl) {
+		this._scratchLbl = _scratchLbl;
+	}
+
+	public JLabel get_archiveLbl() {
+		return _archiveLbl;
+	}
+
+	public void set_archiveLbl(JLabel _archiveLbl) {
+		this._archiveLbl = _archiveLbl;
+	}
+
+	public JTextField get_archiveTxtField() {
+		return _archiveTxtField;
+	}
+
+	public void set_archiveTxtField(JTextField _archiveTxtField) {
+		this._archiveTxtField = _archiveTxtField;
+	}
+
+	public JTextField get_scratchTxtField() {
+		return _scratchTxtField;
+	}
+
+	public void set_scratchTxtField(JTextField _scratchTxtField) {
+		this._scratchTxtField = _scratchTxtField;
+	}
+	
+	public JTextField get_ipTxtField() {
+		return _ipTxtField;
+	}
+
+	public JLabel get_ipLbl() {
+		return _ipLbl;
+	}
+
+}

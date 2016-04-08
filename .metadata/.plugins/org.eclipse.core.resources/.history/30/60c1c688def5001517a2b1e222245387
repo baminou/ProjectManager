@@ -1,0 +1,54 @@
+package app;
+
+import java.io.File;
+import java.util.Vector;
+
+public class FileTree2 {
+	
+	public static void main(String args[]){
+		FileTree2 f = new FileTree2(new File("/Users/briceaminou"));
+	}
+	
+	public FileTree2(File file){
+		System.out.println(file.getAbsolutePath());
+		scan(new Node(file));
+	}
+	
+	private static Node scan(File node, int depth){
+		if(node.get_file().isDirectory()){
+			for(File f : node.get_file().listFiles()){
+				Node new_node = new FileTree2.Node(f);
+				node.get_children().add(scan(new_node));
+				System.out.println(f.getAbsolutePath());
+			}
+		}
+		return node;
+	}
+	
+	private static class Node{
+		private File _file;
+		private Vector<Node> _children;
+		
+		public Node(File file){
+			_file = file;
+			_children = new Vector<Node>();
+		}
+
+		public File get_file() {
+			return _file;
+		}
+
+		public void set_file(File _file) {
+			this._file = _file;
+		}
+
+		public Vector<Node> get_children() {
+			return _children;
+		}
+
+		public void set_children(Vector<Node> _children) {
+			this._children = _children;
+		}
+	}
+
+}

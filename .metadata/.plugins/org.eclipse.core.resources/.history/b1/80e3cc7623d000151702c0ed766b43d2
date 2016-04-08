@@ -1,0 +1,23 @@
+package model;
+
+import java.io.InputStream;
+import java.rmi.registry.LocateRegistry;
+import java.util.Properties;
+
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
+
+import app.FileTree;
+import app.ProjectManagerInterface;
+
+public class SelectExistingProjectModel {
+	public FileTree getFoldersTree(){
+		Properties prop = new Properties();
+		InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties");
+		prop.load(input);
+		
+		_registry = LocateRegistry.getRegistry(prop.getProperty("ip"),Integer.valueOf(prop.getProperty("port")));
+		_stub = (ProjectManagerInterface) _registry.lookup("project_manager");
+		_stub.getScratchTreeStructure().getModel().getRoot();
+	}
+}

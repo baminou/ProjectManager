@@ -1,0 +1,167 @@
+package controller;
+
+import java.io.File;
+import java.io.IOException;
+
+import conv.ConventionException;
+import model.GeneralInfoModel;
+import model.GenericModel;
+import model.SpecificProjectModel;
+import view.GenericView;
+import view.SpecificProjectView;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+
+public class GenericController extends MicroarrayController {
+	private GenericView _view;
+	private GenericModel _model;
+	private static GenericController instance = null;
+	
+	private GenericController(){
+		super();
+		_view = GenericView.getInstance();
+		_model = GenericModel.getInstance();
+		
+		_view.get_generateBtn().addActionListener(new GenerateActionListener());
+	}
+	
+	public static GenericController getInstance(){
+		if(instance == null){
+			instance = new GenericController();
+		}
+		return instance;
+	}
+
+	public void set_view(GenericView _view) {
+		this._view = _view;
+	}
+	public void set_model(GenericModel _model) {
+		this._model = _model;
+	}
+
+	@Override
+	public void experimentListChange(int index, String value) {
+		if(index>1) _view.get_platformTxtField().setEnabled(false);
+		else _view.get_platformTxtField().setEnabled(true);
+	}
+
+	@Override
+	public void reset() {
+		_view.get_platformTxtField().setText(null);
+		_view.get_additionalResultsFilesTxtArea().setText(null);
+		_view.get_resultsFileDescriptionTxtArea().setText(null);
+		_view.get_labelProtocolTxtArea().setText(null);
+		_view.get_hybProtocolTxtArea().setText(null);
+		_view.get_scanProtocolTxtArea().setText(null);
+		_view.get_growthProtocolTxtArea().setText(null);
+		_view.get_treatmentProtocolTxtArea().setText(null);
+		_view.get_dataProcessingTxtArea().setText(null);
+		_view.get_extractProtocolTxtArea().setText(null);
+		
+		_model.set_platform(null);
+		_model.set_additional_results(null);
+		_model.set_results_file(null);
+		_model.set_label_protocol(null);
+		_model.set_hyb_protocol(null);
+		_model.set_scan_protocol(null);
+		_model.set_growthProtocol(null);
+		_model.set_treatmentProtocol(null);
+		_model.set_extractProtocol(null);
+		_model.set_dataProcessing(null);
+		_model.set_extractProtocol(null);
+	}
+
+	@Override
+	public SpecificProjectModel get_model() {
+		return _model;
+	}
+
+	@Override
+	public SpecificProjectView get_view() {
+		return _view;
+	}
+
+	@Override
+	public void enable() {
+		_view.get_platformTxtField().setEnabled(true);
+		_view.get_additionalResultsFilesTxtArea().setEnabled(true);
+		_view.get_resultsFileDescriptionTxtArea().setEnabled(true);
+		_view.get_labelProtocolTxtArea().setEnabled(true);
+		_view.get_hybProtocolTxtArea().setEnabled(true);
+		_view.get_scanProtocolTxtArea().setEnabled(true);
+		_view.get_growthProtocolTxtArea().setEnabled(true);
+		_view.get_treatmentProtocolTxtArea().setEnabled(true);
+		_view.get_dataProcessingTxtArea().setEnabled(true);
+		_view.get_extractProtocolTxtArea().setEnabled(true);
+	}
+
+	@Override
+	public void disable() {
+		_view.get_platformTxtField().setEnabled(false);
+		_view.get_additionalResultsFilesTxtArea().setEnabled(false);
+		_view.get_resultsFileDescriptionTxtArea().setEnabled(false);
+		_view.get_labelProtocolTxtArea().setEnabled(false);
+		_view.get_hybProtocolTxtArea().setEnabled(false);
+		_view.get_scanProtocolTxtArea().setEnabled(false);
+		_view.get_growthProtocolTxtArea().setEnabled(false);
+		_view.get_treatmentProtocolTxtArea().setEnabled(false);
+		_view.get_dataProcessingTxtArea().setEnabled(false);
+		_view.get_extractProtocolTxtArea().setEnabled(false);
+	}
+
+	@Override
+	public void generate() throws RowsExceededException, WriteException, BiffException, IOException, ConventionException {
+		GeneralInfoModel info = GeneralInfoModel.getInstance();
+		
+		if(_view.get_platformTxtField().getText().isEmpty()&&_view.get_platformTxtField().isEnabled()){
+			throw new ConventionException("Platform field is required.");
+		}
+		
+		String folder_name = get_folder_name(info.get_title(),info.get_species(),info.get_description(),info.get_project(), info.get_current_absolute_path())+"/";
+		create_folder(folder_name);
+		
+		Workbook template = Workbook.getWorkbook(getClass().getClassLoader().getResourceAsStream("GA_affy.xls"));
+		WritableWorkbook wbCopy = Workbook.createWorkbook(new File(folder_name+"metadata.xls"),template);
+		
+		WritableSheet sheet = wbCopy.getSheet("Metadata Template");
+		
+		sheet.addCell(new Label(1,9,info.get_title()));
+		sheet.addCell(new Label(1,10,info.get_summary()));
+		sheet.addCell(new Label(1,11,info.get_overall_design()));
+		sheet.addCell(new Label(1,12,info.get_contributor()));
+		
+		sheet.addCell(new Label(1,37,_model.get_growthProtocol()));
+		sheet.addCell(new Label(1,38,_model.get_treatmentProtocol()));
+		sheet.addCell(new Label(1,39,_model.get_extractProtocol()));
+		sheet.addCell(new Label(1,40,_model.get_label_protocol()));
+		sheet.addCell(new Label(1,41,_model.get_hyb_protocol()));
+		sheet.addCell(new Label(1,42,_model.get_scan_protocol()));
+		sheet.addCell(new Label(1,43,_model.get_dataProcessing()));
+		sheet.addCell(new Label(1,44,_model.get_additional_results()));
+		sheet.addCell(new Label(1,45,_model.get_results_file()));
+		sheet.addCell(new Label(0,46,_model.get_platform()));
+		wbCopy.write();
+		wbCopy.close();
+	}
+
+	@Override
+	public void save() {
+		_model.set_platform(_view.get_platformTxtField().getText());
+		_model.set_additional_results(_view.get_additionalResultsFilesTxtArea().getText());
+		_model.set_results_file(_view.get_resultsFileDescriptionTxtArea().getText());
+		_model.set_label_protocol(_view.get_labelProtocolTxtArea().getText());
+		_model.set_hyb_protocol(_view.get_hybProtocolTxtArea().getText());
+		_model.set_scan_protocol(_view.get_scanProtocolTxtArea().getText());
+		_model.set_growthProtocol(_view.get_growthProtocolTxtArea().getText());
+		_model.set_treatmentProtocol(_view.get_treatmentProtocolTxtArea().getText());
+		_model.set_dataProcessing(_view.get_dataProcessingTxtArea().getText());
+		_model.set_extractProtocol(_view.get_extractProtocolTxtArea().getText());
+	}
+	
+	
+}

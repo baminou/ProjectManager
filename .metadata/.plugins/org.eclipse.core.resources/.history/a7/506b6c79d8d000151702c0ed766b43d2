@@ -1,0 +1,45 @@
+package model;
+
+
+public abstract class MicroarrayModel extends SpecificProjectModel {
+	
+	protected String _label_protocol;
+	protected String _hyb_protocol;
+	protected String _scan_protocol;
+	
+	public MicroarrayModel(){
+		
+	}
+
+	public MicroarrayModel(String _label_protocol, String _hyb_protocol,
+			String _scan_protocol) {
+		this._label_protocol = _label_protocol;
+		this._hyb_protocol = _hyb_protocol;
+		this._scan_protocol = _scan_protocol;
+	}
+
+	public String get_label_protocol() {
+		return _label_protocol;
+	}
+
+	public void set_label_protocol(String _label_protocol) {
+		this._label_protocol = _label_protocol;
+	}
+
+	public String get_hyb_protocol() {
+		return _hyb_protocol;
+	}
+
+	public void set_hyb_protocol(String _hyb_protocol) {
+		this._hyb_protocol = _hyb_protocol;
+	}
+
+	public String get_scan_protocol() {
+		return _scan_protocol;
+	}
+
+	public void set_scan_protocol(String _scan_protocol) {
+		this._scan_protocol = _scan_protocol;
+	}
+
+}

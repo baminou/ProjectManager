@@ -1,0 +1,10 @@
+package app;
+
+import java.util.Date;
+
+public class SubProject {
+	private int _id;
+	private Project _project;
+	private Date _creation_date;
+	
+}

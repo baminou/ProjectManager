@@ -1,0 +1,11 @@
+package epi;
+
+public class ServerInterface {
+	private String _ip;
+	private int _port;
+	private String _scratch_directory;
+	private String _archive_directory;
+	private String _registry;
+	private String _stub;
+	
+}

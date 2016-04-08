@@ -1,0 +1,61 @@
+package epi;
+
+public class ServerInterface {
+	private String _ip;
+	private int _port;
+	private String _scratch_directory;
+	private String _archive_directory;
+	private String _registry;
+	private String _stub;
+	private static ServerInterface instance = null;
+	
+	public static ServerInterface getInstance(){
+		if(instance == null){
+			instance = new ServerInterface();
+		}
+	}
+	
+	private ServerInterface(){
+		
+	}
+	
+	public String get_ip() {
+		return _ip;
+	}
+	public void set_ip(String _ip) {
+		this._ip = _ip;
+	}
+	public int get_port() {
+		return _port;
+	}
+	public void set_port(int _port) {
+		this._port = _port;
+	}
+	public String get_scratch_directory() {
+		return _scratch_directory;
+	}
+	public void set_scratch_directory(String _scratch_directory) {
+		this._scratch_directory = _scratch_directory;
+	}
+	public String get_archive_directory() {
+		return _archive_directory;
+	}
+	public void set_archive_directory(String _archive_directory) {
+		this._archive_directory = _archive_directory;
+	}
+	public String get_registry() {
+		return _registry;
+	}
+	public void set_registry(String _registry) {
+		this._registry = _registry;
+	}
+	public String get_stub() {
+		return _stub;
+	}
+	public void set_stub(String _stub) {
+		this._stub = _stub;
+	}
+	
+	
+	
+}

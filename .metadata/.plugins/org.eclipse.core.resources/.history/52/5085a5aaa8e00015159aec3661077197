@@ -1,0 +1,95 @@
+package view;
+
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.factories.FormFactory;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import java.awt.Color;
+import javax.swing.UIManager;
+import java.awt.Font;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.EtchedBorder;
+
+public class GenericView extends MicroarrayView{
+
+
+	
+	public GenericView() {
+
+		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Generic Microarray", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		setBackground(UIManager.getColor("EditorPane.selectionBackground"));
+		setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,}));
+		
+		
+		add(InfoFields.get_instance().get_platformLbl(), "2, 2, right, default");
+		add(InfoFields.get_instance().get_platformTxtField(), "4, 2, fill, default");
+		add(InfoFields.get_instance().get_growthProtocolLbl(), "2, 4, right, default");
+		add(InfoFields.get_instance().get_growthProtocolScrollPane(), "4, 4, fill, fill");
+		add(InfoFields.get_instance().get_treatmentProtocolLbl(), "2, 6, right, default");
+		add(InfoFields.get_instance().get_treatmentProtocolScrollPane(), "4, 6, fill, fill");
+		add(InfoFields.get_instance().get_extractProtocolLbl(), "2, 8, right, default");
+		add(InfoFields.get_instance().get_extractProtocolScrollPane(), "4, 8, fill, fill");
+		add(InfoFields.get_instance().get_labelProtocolLbl(), "2, 10, right, default");
+		add(InfoFields.get_instance().get_labelProtocolScrollPane(), "4, 10, fill, fill");
+		add(InfoFields.get_instance().get_hybProtocolLbl(), "2, 12, right, default");
+		add(InfoFields.get_instance().get_hybProtocolScrollPane(), "4, 12, fill, fill");
+		add(InfoFields.get_instance().get_scanProtocolLbl(), "2, 14, right, default");
+		add(InfoFields.get_instance().get_scanProtocolScrollPane(), "4, 14, fill, fill");
+		add(InfoFields.get_instance().get_dataProcessingLbl(), "2, 16, right, default");
+		add(InfoFields.get_instance().get_dataProcessingScrollPane(), "4, 16, fill, fill");
+		
+		add(InfoFields.get_instance().get_additionalResultsFilesLbl(), "2, 18, right, default");
+		add(InfoFields.get_instance().get_additionalResultsFilesScrollPane(), "4, 18, fill, fill");
+		add(_resultsFileDescriptionsLbl, "2, 20, right, default");
+		add(_resultsFileDescriptionScrollPane, "4, 20, fill, fill");*/
+		
+		//add(_generateBtn, "4, 22");
+		//_initTips();
+	}
+	
+	protected void _initTips() {
+		/*super._initTips();
+		this._platformLbl.setToolTipText("Enter the used platform.");
+		this._platformTxtField.setToolTipText("Enter the used platform.");
+		this._additionalResultsFilesLbl.setToolTipText("List the name of any additional results files that you will be including your submission.");
+		this._additionalResultsFilesTxtArea.setToolTipText("List the name of any additional results files that you will be including your submission.");
+		this._resultsFileDescriptionsLbl.setToolTipText("Provide a description of the results file being submitted.");
+		this._resultsFileDescriptionTxtArea.setToolTipText("Provide a description of the results file being submitted.");*/
+	}
+}

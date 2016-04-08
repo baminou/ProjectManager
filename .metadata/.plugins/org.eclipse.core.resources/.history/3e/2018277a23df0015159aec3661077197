@@ -1,0 +1,9 @@
+package model;
+
+import app.FileTree;
+
+public class SelectExistingProjectModel {
+	public FileTree getFoldersTree(){
+		return null;
+	}
+}

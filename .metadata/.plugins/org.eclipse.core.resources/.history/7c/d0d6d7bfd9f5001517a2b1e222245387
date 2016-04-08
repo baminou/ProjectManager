@@ -1,0 +1,22 @@
+package app;
+
+import java.io.File;
+import java.util.Vector;
+
+public class FileTree2 {
+	
+	private static scan(File file){
+		Node node = new Node(file);
+	}
+	
+	private class Node{
+		private File _file;
+		private Vector<Node> _children;
+		
+		public Node(File file){
+			_file = file;
+			_children = new Vector<Node>();
+		}
+	}
+
+}

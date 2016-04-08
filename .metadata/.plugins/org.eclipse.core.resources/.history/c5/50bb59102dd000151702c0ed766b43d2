@@ -1,0 +1,201 @@
+package controller;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.File;
+import java.util.Vector;
+
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import model.GeneralInfoModel;
+import view.GeneralInfoView;
+import epi.GeneralInfoObserver;
+import epi.ProjectConventionException;
+import epi.Project;
+import epi.Resetable;
+
+public class GeneralInfoController implements Resetable {
+	private static GeneralInfoController instance = null;
+	private GeneralInfoModel _model;
+	private GeneralInfoView _view;
+	
+	private Vector<GeneralInfoObserver> _observers = new Vector<GeneralInfoObserver>();
+	
+	private GeneralInfoController(){
+		_model = GeneralInfoModel.getInstance();
+		_view = GeneralInfoView.getInstance();
+		
+		_view.get_resetBtn().addActionListener(new ResetBtnActionListener());
+		_view.get_experimentList().addListSelectionListener(new ExperimentListSelectionListener());
+		_view.get_selectExistingProjectBtn().addActionListener(new SelectExistingProjectBtnActionListener());
+		init();
+	}
+	
+	public void init(){
+		_disable();
+	}
+	
+	public void save(){
+		_model.set_title(_view.get_titleTxtField().getText());
+		_model.set_species(_view.get_speciesComboBox().getSelectedItem().toString());
+		_model.set_description(_view.get_descriptionTxtField().getText());
+		_model.set_summary(_view.get_summaryTextArea().getText());
+		_model.set_overall_design(_view.get_overallDesignTxtArea().getText());
+		_model.set_contributor(_view.get_contributorTxtField().getText());
+		_model.set_experiment(_view.get_experimentList().getSelectedValue().toString());
+	}
+	
+	public static GeneralInfoController getInstance(){
+		if(instance==null){
+			instance = new GeneralInfoController();
+		}
+		return instance;
+	}
+	
+	public class ResetBtnActionListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			reset();
+		}
+	}
+	
+	public class ExperimentListSelectionListener implements ListSelectionListener{
+		@Override
+		public void valueChanged(ListSelectionEvent arg0) {
+			for(GeneralInfoObserver observer: _observers){
+				observer.experimentListChange(_view.get_experimentList().getSelectedIndex(), _view.get_experimentList().getSelectedValue().toString());
+			}
+			_view.get_experimentNameLbl().setText(_view.get_experimentList().getSelectedValue().toString());
+		}
+	}
+	
+	public class SelectExistingProjectBtnActionListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			try {
+				String project_name = _model.getSelectedProject();
+				Project project = new Project(project_name);
+				
+				_view.get_projectTitle().setText(project.get_title());
+				_view.get_projectYear().setText(String.valueOf(project.get_year()));
+				_view.get_projectVersion().setText(String.valueOf(project.get_version()));
+				
+				_enable();
+				
+				System.out.println(project_name);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+				
+				try {
+					
+					
+					
+					
+					
+					
+					_model.set_current_absolute_path(selectedFile.getAbsolutePath());
+					_model.set_project(project);
+				} catch (ProjectConventionException e) {
+					JOptionPane.showMessageDialog(_view, e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+				}
+		}
+	}
+	
+	public GeneralInfoModel get_model() {
+		return _model;
+	}
+	public void set_model(GeneralInfoModel _model) {
+		this._model = _model;
+	}
+	public GeneralInfoView get_view() {
+		return _view;
+	}
+	public void set_view(GeneralInfoView _view) {
+		this._view = _view;
+	}
+	
+	
+
+	public Vector<GeneralInfoObserver> get_observers() {
+		return _observers;
+	}
+	public void set_observers(Vector<GeneralInfoObserver> _observers) {
+		this._observers = _observers;
+	}
+	
+	private void _disable(){
+		_view.get_titleTxtField().setEnabled(false);
+		_view.get_speciesComboBox().setEnabled(false);
+		_view.get_descriptionTxtField().setEnabled(false);
+		_view.get_summaryTextArea().setEnabled(false);
+		_view.get_overallDesignTxtArea().setEnabled(false);
+		_view.get_contributorTxtField().setEnabled(false);
+		_view.get_experimentList().setEnabled(false);
+		for(GeneralInfoObserver observer : _observers){
+			observer.disable();
+		}
+	}
+	
+	private void _enable(){
+		_view.get_titleTxtField().setEnabled(true);
+		_view.get_speciesComboBox().setEnabled(true);
+		_view.get_descriptionTxtField().setEnabled(true);
+		_view.get_summaryTextArea().setEnabled(true);
+		_view.get_overallDesignTxtArea().setEnabled(true);
+		_view.get_contributorTxtField().setEnabled(true);
+		_view.get_experimentList().setEnabled(true);
+		for(GeneralInfoObserver observer : _observers){
+			observer.enable();
+		}
+	}
+	
+	@Override
+	public void reset() {
+		
+		_view.get_projectTitle().setText(null);
+		_view.get_projectYear().setText(null);
+		_view.get_projectVersion().setText(null);
+		
+		_model.set_project_id(-1);
+		_model.set_title(null);
+		_model.set_species(null);
+		_model.set_description(null);
+		_model.set_summary(null);
+		_model.set_overall_design(null);
+		_model.set_contributor(null);
+		_model.set_experiment(null);
+		_model.set_current_absolute_path(null);
+		_model.set_project(null);
+		
+		_view.get_titleTxtField().setText(null);
+		_view.get_speciesComboBox().setSelectedIndex(0);
+		_view.get_descriptionTxtField().setText(null);
+		_view.get_summaryTextArea().setText(null);
+		_view.get_overallDesignTxtArea().setText(null);
+		_view.get_contributorTxtField().setText(null);
+		_view.get_experimentList().setSelectedIndex(0);
+		
+		for(GeneralInfoObserver observer : _observers){
+			observer.reset();
+		}
+		
+		_disable();
+	}
+	
+	public void SendError(String msg){
+		_view.get_msgLabel().setText(msg);
+	}
+	
+	public void ReleaseError(){
+		_view.get_msgLabel().setText(" ");
+	}
+	
+}

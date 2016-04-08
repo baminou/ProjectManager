@@ -1,0 +1,11 @@
+package epi;
+
+import conv.ConventionException;
+
+public class ProjectConventionException extends ConventionException {
+
+	public ProjectConventionException(String message) {
+		super("Project - "+message);
+	}
+
+}

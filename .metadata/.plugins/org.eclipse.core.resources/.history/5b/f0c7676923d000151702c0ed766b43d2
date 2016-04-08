@@ -1,0 +1,7 @@
+package model;
+
+public class SelectExistingProjectModel {
+	public FileTree getFoldersTree(){
+		
+	}
+}

@@ -1,0 +1,13 @@
+package epi;
+
+import javax.swing.JLabel;
+
+import controller.ServerController;
+
+public class ServerViewLabel extends JLabel implements ServerViewObserver {
+	
+	public ServerViewLabel(String text){
+		super(text);
+	}
+
+}

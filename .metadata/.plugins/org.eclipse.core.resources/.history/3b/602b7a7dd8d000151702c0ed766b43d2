@@ -1,0 +1,37 @@
+package model;
+
+
+public class GenericModel extends MicroarrayModel {
+	
+	private String _platform;
+	private String _additional_results;
+	private String _results_file;
+	private static GenericModel instance = null;
+
+	public static GenericModel getInstance(){
+		if(instance == null){
+			instance = new GenericModel();
+		}
+		return instance;
+	}
+
+	public String get_platform() {
+		return _platform;
+	}
+	public void set_platform(String _platform) {
+		this._platform = _platform;
+	}
+	public String get_additional_results() {
+		return _additional_results;
+	}
+	public void set_additional_results(String _additional_results) {
+		this._additional_results = _additional_results;
+	}
+	public String get_results_file() {
+		return _results_file;
+	}
+	public void set_results_file(String _results_file) {
+		this._results_file = _results_file;
+	}
+	
+}

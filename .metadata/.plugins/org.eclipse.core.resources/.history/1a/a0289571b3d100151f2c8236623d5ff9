@@ -1,0 +1,124 @@
+package conv;
+
+import javax.swing.JPanel;
+
+import java.awt.BorderLayout;
+
+import javax.swing.BoxLayout;
+
+import java.awt.Component;
+import java.awt.FlowLayout;
+
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
+import java.awt.Font;
+import java.io.IOException;
+import java.rmi.NotBoundException;
+
+import javax.swing.border.EmptyBorder;
+
+import epi.ServerInterface;
+
+public class ConventionPanel extends JPanel {
+	
+	private final JPanel _topPanel = new JPanel();
+	private final JLabel _projectConvention = new JLabel();
+	private final JLabel _lblProject = new JLabel("Project:");
+	private final JPanel _bottomPanel = new JPanel();
+	private final JLabel _lblSubproject = new JLabel("Sub-Project:");
+	private final JLabel _subProjectConvention = new JLabel();
+	private final JLabel _projectPatternlbl;
+	private final JLabel _subProjectPatternLbl;
+	
+	public ConventionPanel() {
+		setLayout(new BorderLayout(0, 0));
+		
+		
+		_topPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		add(_topPanel, BorderLayout.NORTH);
+		_topPanel.setLayout(new BorderLayout(0, 0));
+		
+		
+		try {
+			_projectConvention.setText(ServerInterface.getInstance().get_stub().getProjectConvention());
+			_projectConvention.setFont(new Font("Arial", Font.BOLD, 18));
+			_projectConvention.setHorizontalAlignment(SwingConstants.CENTER);
+			_topPanel.add(_projectConvention);
+		} catch (IOException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			_projectPatternlbl.setText(ServerInterface.getInstance().get_stub().getProjectPattern());
+		} catch (IOException | NotBoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		_subProjectPatternLbl.setText(ServerInterface.getInstance().get_stub().getSubProjectPattern());
+		
+		_lblProject.setFont(new Font("Arial", Font.PLAIN, 13));
+		_lblProject.setHorizontalAlignment(SwingConstants.CENTER);
+		_topPanel.add(_lblProject, BorderLayout.NORTH);
+		
+		_topPanel.add(_projectPatternlbl, BorderLayout.SOUTH);
+		
+		
+		_bottomPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		add(_bottomPanel, BorderLayout.SOUTH);
+		_bottomPanel.setLayout(new BorderLayout(0, 0));
+		
+		
+		_lblSubproject.setFont(new Font("Arial", Font.PLAIN, 12));
+		_lblSubproject.setHorizontalAlignment(SwingConstants.CENTER);
+		_bottomPanel.add(_lblSubproject, BorderLayout.NORTH);
+		
+		try {
+			_subProjectConvention.setText(ServerInterface.getInstance().get_stub().getSubProjectConvention());
+			_subProjectConvention.setFont(new Font("Arial", Font.BOLD, 18));
+			_subProjectConvention.setHorizontalAlignment(SwingConstants.CENTER);
+			_bottomPanel.add(_subProjectConvention);
+			
+		} catch (IOException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		_bottomPanel.add(_subProjectPatternLbl, BorderLayout.SOUTH);
+		
+	}
+
+	public JPanel get_topPanel() {
+		return _topPanel;
+	}
+
+	public JLabel get_projectConvention() {
+		return _projectConvention;
+	}
+
+	public JLabel get_lblProject() {
+		return _lblProject;
+	}
+
+	public JPanel get_bottomPanel() {
+		return _bottomPanel;
+	}
+
+	public JLabel get_lblSubproject() {
+		return _lblSubproject;
+	}
+
+	public JLabel get_subProjectConvention() {
+		return _subProjectConvention;
+	}
+
+	public JLabel get_projectPatternlbl() {
+		return _projectPatternlbl;
+	}
+
+	public JLabel get_subProjectPatternLbl() {
+		return _subProjectPatternLbl;
+	}
+
+}

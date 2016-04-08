@@ -1,0 +1,18 @@
+package epi;
+
+import javax.swing.JLabel;
+
+import controller.ServerController;
+
+public class ServerViewLabel extends JLabel implements ServerViewObserver {
+	
+	public ServerViewLabel(String text){
+		super(text);
+	}
+
+	@Override
+	public void changeConnectionStatus() {
+		//this.setText(ServerController.getInstance().isConnected()?"Connected to "+ServerController.getInstance().get_model().get_ip():"Disconnected");
+	}
+
+}

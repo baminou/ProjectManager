@@ -1,0 +1,53 @@
+package model;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.rmi.NotBoundException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.Arrays;
+import java.util.Properties;
+
+import javax.swing.tree.TreePath;
+
+import app.ProjectManagerInterface;
+
+public class SyncModel {
+	
+	private Registry _registry;
+	private ProjectManagerInterface _stub;
+	
+	public SyncModel() throws IOException, NotBoundException{
+		Properties prop = new Properties();
+		InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties");
+		prop.load(input);
+		
+		registry = LocateRegistry.getRegistry(prop.getProperty("ip"),Integer.valueOf(prop.getProperty("port")));
+		_stub = (ProjectManagerInterface) registry.lookup("project_manager");
+		stub.getScratchTreeStructure().getModel().getRoot();
+	}
+	
+	public void sendRequest(TreePath[] paths){
+		for(int i=0;i<paths.length;i++){
+			
+			//System.out.println(Arrays.toString(paths[i].getPath()));
+		}
+	}
+
+	public Registry get_registry() {
+		return _registry;
+	}
+
+	public void set_registry(Registry _registry) {
+		this._registry = _registry;
+	}
+
+	public ProjectManagerInterface get_stub() {
+		return _stub;
+	}
+
+	public void set_stub(ProjectManagerInterface _stub) {
+		this._stub = _stub;
+	}
+
+}

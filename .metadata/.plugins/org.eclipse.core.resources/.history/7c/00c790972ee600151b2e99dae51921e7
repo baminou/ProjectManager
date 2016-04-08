@@ -1,0 +1,8 @@
+package app;
+
+public class Generic {
+	
+	private String _platform;
+	private String _additionalResultsFiles;
+
+}

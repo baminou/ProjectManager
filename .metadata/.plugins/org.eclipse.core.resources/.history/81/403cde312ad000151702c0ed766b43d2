@@ -1,0 +1,39 @@
+package controller;
+
+import java.io.IOException;
+import java.rmi.NotBoundException;
+
+import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
+
+import epi.ServerInterface;
+import model.SyncModel;
+import view.SyncView;
+
+public class SyncController {
+	
+	private SyncView _view;
+	private SyncModel _model;
+	
+	public SyncController() throws IOException, NotBoundException{
+		_view = new SyncView();
+		_model = new SyncModel();
+	}
+
+	public void show() throws IOException, NotBoundException {
+		
+		DefaultTreeModel model = (DefaultTreeModel)_view.get_scratchTree().getModel();
+		model.setRoot((TreeNode)ServerInterface.getInstance().get_stub().getScratchTreeStructure().getModel().getRoot());
+		
+		model = (DefaultTreeModel)_view.get_archiveTree().getModel();
+		model.setRoot((TreeNode) ServerInterface.getInstance().get_stub().getArchiveTreeStructure().getModel().getRoot());
+		
+		int result = JOptionPane.showConfirmDialog(null, _view,"Sync folder",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
+		
+		if(result==JOptionPane.OK_OPTION){
+			_model.sendRequest(_view.get_scratchTree().getSelectionPaths());
+		}
+	}
+
+}

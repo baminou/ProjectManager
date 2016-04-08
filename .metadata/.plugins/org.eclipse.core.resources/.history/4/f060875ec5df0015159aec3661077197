@@ -1,0 +1,88 @@
+package app;
+
+import java.util.Date;
+
+public class SubProject {
+	private int _id;				//ID of the sub-project for database
+	private Date _creation_date;	//Creation date of the sub-project
+	private String _title;			//Title of the experiment
+	private String _species;		//Species analyzed in the experiment
+	private String _description;	//Description of the experiment
+	private Project _project;		//Project related
+	private String _summary;		//Summary of the experiment
+	private String _overall_design;	//Overall design of the experiment
+	private String _contributors;	//Contributors in the experiment
+	private String _experiment;		//Type of experiment
+	
+	/**
+	 * Return the project related to the experiment
+	 * @return	Project related to the experiment
+	 */
+	public Project get_project() {
+		return _project;
+	}
+	
+	/**
+	 * Assign a project to the experiment
+	 * @param _project
+	 */
+	public void set_project(Project _project) {
+		this._project = _project;
+	}
+	public String get_summary() {
+		return _summary;
+	}
+	public void set_summary(String _summary) {
+		this._summary = _summary;
+	}
+	public String get_overall_design() {
+		return _overall_design;
+	}
+	public void set_overall_design(String _overall_design) {
+		this._overall_design = _overall_design;
+	}
+	public String get_contributors() {
+		return _contributors;
+	}
+	public void set_contributors(String _contributors) {
+		this._contributors = _contributors;
+	}
+	public String get_experiment() {
+		return _experiment;
+	}
+	public void set_experiment(String _experiment) {
+		this._experiment = _experiment;
+	}
+	public int get_id() {
+		return _id;
+	}
+	public void set_id(int _id) {
+		this._id = _id;
+	}
+	public Date get_creation_date() {
+		return _creation_date;
+	}
+	public void set_creation_date(Date _creation_date) {
+		this._creation_date = _creation_date;
+	}
+	public String get_title() {
+		return _title;
+	}
+	public void set_title(String _title) {
+		this._title = _title;
+	}
+	public String get_species() {
+		return _species;
+	}
+	public void set_species(String _species) {
+		this._species = _species;
+	}
+	public String get_description() {
+		return _description;
+	}
+	public void set_description(String _description) {
+		this._description = _description;
+	}
+	
+	
+}

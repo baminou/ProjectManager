@@ -1,0 +1,17 @@
+package app;
+
+import java.io.File;
+
+public class FileTree2 {
+	
+	private static scan(File file){
+		
+	}
+	
+	private class Node{
+		private File _file;
+		
+		public Node(File file)
+	}
+
+}

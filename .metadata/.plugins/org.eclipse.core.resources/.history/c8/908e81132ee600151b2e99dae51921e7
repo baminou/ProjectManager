@@ -1,0 +1,72 @@
+package app;
+
+import java.io.File;
+import java.io.IOException;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.Properties;
+import java.util.Vector;
+
+import javax.swing.tree.TreePath;
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+
+public interface ProjectManagerInterface extends Remote{
+	public String getScratchDirectory() throws RemoteException, IOException;
+	public String getArchiveDirectory() throws RemoteException, IOException;
+	public String getScratchDrive() throws RemoteException;
+	public String getArchiveDrive() throws RemoteException;
+	public FileTree getScratchTreeStructure() throws RemoteException;
+	//public FileTree getArchiveTreeStructure() throws RemoteException;
+	public void archivePath(TreePath tree) throws RemoteException, IOException, Exception;
+	public String getScratchPath() throws RemoteException;
+	public String getArchivePath() throws RemoteException;
+	
+	/**
+	 * Create a project folder on the server
+	 * @param project				The project to create
+	 * @throws RemoteException		The host is unreachable
+	 * @throws ConventionException	The convention is not respected
+	 */
+	public int createProjectFolder(Project project) throws RemoteException, ConventionException;
+	public void createScratchDirectory(String path) throws RemoteException;
+	
+	public String getProjectConvention() throws RemoteException;
+	public String getProjectPattern() throws RemoteException;
+	public String getSubProjectConvention() throws RemoteException;
+	public String getSubProjectPattern() throws RemoteException;
+	
+	public String getSupportName() throws RemoteException;
+	public String getSupportEmail() throws RemoteException;
+	public String getSupportExtension() throws RemoteException;
+	
+	public void createPCRDirectory(String species, String description, String project, String parent_path, String title, String summary, 
+			String overall_design, String contributor, String growth_protocol, String treatment_protocol, String extract_protocol, 
+			String label_protocol, String data_processing, String value_definition) throws RemoteException, BiffException, IOException, RowsExceededException, WriteException;
+	void createSequencingDirectory(String species, String description,
+			String project, String parent_path, String title, String summary,
+			String overall_design, String contributor, String growth_protocol,
+			String treatment_protocol, String extract_protocol,
+			String data_processing, String genome_build,
+			String library_construction, String library_strategy,
+			String processed_data) throws BiffException, IOException,
+			RowsExceededException, WriteException, RemoteException;
+	void createIlluminaDirectory(String species, String description,
+			String project, String parent_path, String title, String summary,
+			String overall_design, String contributor, String growth_protocol,
+			String treatment_protocol, String extract_protocol,
+			String label_protocol, String hyb_protocol, String scan_protocol,
+			String data_processing, String matrix_processed,
+			String matrix_signal) throws BiffException, IOException,
+			RowsExceededException, WriteException, RemoteException;
+	void createGenericDirectory(Project project, String species, String description,
+			String parent_path, String title, String summary,
+			String overall_design, String contributor, String growth_protocol,
+			String treatment_protocol, String extract_protocol,
+			String label_protocol, String hyb_protocol, String scan_protocol,
+			String data_processing, String additional_results,
+			String results_file, String platform) throws BiffException,
+			IOException, RowsExceededException, WriteException, RemoteException, ConventionException;
+	public void createPCRDirectory(PCR pcr) throws RowsExceededException, WriteException, BiffException, IOException;
+}

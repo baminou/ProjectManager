@@ -1,0 +1,38 @@
+package controller;
+
+import javax.swing.JOptionPane;
+
+import view.SelectExistingProjectView;
+import model.SelectExistingProjectModel;
+
+public class SelectExistingProjectController {
+	
+	private SelectExistingProjectModel _model;
+	private SelectExistingProjectView _view;
+	
+	public SelectExistingProjectController(){
+		_model = new SelectExistingProjectModel();
+		_view = new SelectExistingProjectView();
+	}
+	
+	public String show(){
+		int result = JOptionPane.showConfirmDialog(null, _view,"Sync folder",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
+	}
+
+	public SelectExistingProjectModel get_model() {
+		return _model;
+	}
+
+	public void set_model(SelectExistingProjectModel _model) {
+		this._model = _model;
+	}
+
+	public SelectExistingProjectView get_view() {
+		return _view;
+	}
+
+	public void set_view(SelectExistingProjectView _view) {
+		this._view = _view;
+	}
+
+}

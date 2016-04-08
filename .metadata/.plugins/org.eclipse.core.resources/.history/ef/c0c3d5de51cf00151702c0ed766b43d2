@@ -1,0 +1,66 @@
+package controller;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.rmi.NotBoundException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.Arrays;
+import java.util.Properties;
+import java.util.Vector;
+
+import javax.swing.JOptionPane;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
+
+import app.ProjectManagerInterface;
+import model.SyncModel;
+import view.SyncView;
+
+public class SyncController {
+	
+	private SyncView _view;
+	private SyncModel _model;
+	
+	public SyncController(){
+		_view = new SyncView();
+		_model = new SyncModel();
+		
+		_view.get_scratchTree().addTreeSelectionListener(new ScratchTreeSelectionListener());
+	}
+
+	public void show() throws IOException, NotBoundException {
+		Properties prop = new Properties();
+		InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties");
+		prop.load(input);
+		
+		Registry registry = LocateRegistry.getRegistry("172.26.37.38",Integer.valueOf(prop.getProperty("port")));
+		ProjectManagerInterface stub = (ProjectManagerInterface) registry.lookup("project_manager");
+		
+		stub.getScratchTreeStructure().getModel().getRoot();
+		DefaultTreeModel model = (DefaultTreeModel)_view.get_scratchTree().getModel();
+		model.setRoot((TreeNode) stub.getScratchTreeStructure().getModel().getRoot());
+		
+		stub.getArchiveTreeStructure().getModel().getRoot();
+		model = (DefaultTreeModel)_view.get_archiveTree().getModel();
+		model.setRoot((TreeNode) stub.getArchiveTreeStructure().getModel().getRoot());
+		
+		int result = JOptionPane.showConfirmDialog(null, _view,"Sync folder",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
+		
+		if(result==JOptionPane.OK_OPTION){
+			for(int i=0;i<_view.get_scratchTree().getSelectionCount();i++){
+				System.out.println(Arrays.toString(_view.get_scratchTree().getSelectionPaths()[i].getPath()));
+			}
+		}
+	}
+	
+	public class ScratchTreeSelectionListener implements TreeSelectionListener{
+		@Override
+		public void valueChanged(TreeSelectionEvent e) {
+			System.out.println(e.getPath());
+		}
+	}
+
+}

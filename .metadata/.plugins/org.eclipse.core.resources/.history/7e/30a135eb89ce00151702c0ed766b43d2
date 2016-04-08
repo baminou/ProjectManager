@@ -1,0 +1,113 @@
+package model;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.SocketException;
+import java.util.Arrays;
+
+import javax.swing.tree.TreePath;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPClientConfig;
+
+import controller.ServerController;
+import jcifs.smb.NtlmPasswordAuthentication;
+import jcifs.smb.SmbException;
+import jcifs.smb.SmbFile;
+import jcifs.smb.SmbFileInputStream;
+
+public class ServerModel {
+	private String _ip;
+	private int _port;
+	private String _username;
+	private String _password;
+	private SmbFile _scratchSambaFile;
+	private SmbFile _archiveSambaFile;
+	private NtlmPasswordAuthentication _auth;
+	
+	public ServerModel(String _ip, int _port, String _username, String _password, String scratch, String archive) throws MalformedURLException {
+		super();
+		this._ip = _ip;
+		this._port = _port;
+		this._username = _username;
+		this._password = _password;
+		//_auth = new NtlmPasswordAuthentication("",_username,_password);
+		this._scratchSambaFile = get_samba_file(_ip,scratch,_auth);
+		this._archiveSambaFile = get_samba_file(_ip,archive,_auth);
+	}
+	public String get_ip() {
+		return _ip;
+	}
+	public SmbFile get_samba_file(String ip, String drive, NtlmPasswordAuthentication auth) throws MalformedURLException{
+		return new SmbFile("smb://"+ip+"/"+drive+"/", auth);
+	}
+	public void set_ip(String _ip) {
+		this._ip = _ip;
+	}
+	public int get_port() {
+		return _port;
+	}
+	public void set_port(int _port) {
+		this._port = _port;
+	}
+	public String get_username() {
+		return _username;
+	}
+	public void set_username(String _username) {
+		this._username = _username;
+	}
+	public String get_password() {
+		return _password;
+	}
+	public void set_password(String _password) {
+		this._password = _password;
+	}
+	public SmbFile get_scratchSambaFile() {
+		return _scratchSambaFile;
+	}
+	public void set_scratchSambaFile(String name) throws Exception {
+		if(!get_samba_file(_ip,name,_auth).exists()) throw new Exception("Scratch Share does not exist on the server.");
+		this._scratchSambaFile = get_samba_file(_ip,name,_auth);
+	}
+	public void set_archiveSambaFile(String name) throws Exception {
+		if(!get_samba_file(_ip,name,_auth).exists()) throw new Exception("Archive Share does not exist on the server.");
+		this._archiveSambaFile = get_samba_file(_ip,name,_auth);
+	}
+	public void set_scratchSambaFile(SmbFile _scratchSambaFile) {
+		this._scratchSambaFile = _scratchSambaFile;
+	}
+	public SmbFile get_archiveSambaFile() {
+		return _archiveSambaFile;
+	}
+	public void set_archiveSambaFile(SmbFile _archiveSambaFile) {
+		this._archiveSambaFile = _archiveSambaFile;
+	}
+	public SmbFile get_samba_file(String drive) throws MalformedURLException{
+		return get_samba_file(_ip,drive,_auth);
+	}
+	public NtlmPasswordAuthentication get_auth() {
+		return _auth;
+	}
+	public void set_auth(NtlmPasswordAuthentication _auth) {
+		this._auth = _auth;
+	}
+	
+	public void synchronizeFiles(TreePath[] paths) throws MalformedURLException, SmbException{
+		for(TreePath path : paths){
+			for(int i=1;i<path.getPathCount();i++){
+				SmbFile scratch_new_file = new SmbFile(ServerController.getInstance().get_model().get_scratchSambaFile().getPath()+path.getPath()[i].toString(), _auth);
+				SmbFile archive_new_file = new SmbFile(ServerController.getInstance().get_model().get_archiveSambaFile().getPath()+path.getPath()[i].toString(), _auth);
+				if(scratch_new_file.isDirectory()&&!archive_new_file.exists()){
+					archive_new_file.mkdir();
+				}
+			}
+			SmbFile src = new SmbFile(ServerController.getInstance().get_model().get_scratchSambaFile().getPath()+path.getPath()[1]+path.getLastPathComponent(),_auth);
+			SmbFile dest = new SmbFile(ServerController.getInstance().get_model().get_archiveSambaFile().getPath()+path.getPath()[1]+path.getLastPathComponent(),_auth);
+			//src.copyTo(dest);
+			//src.delete();
+		}
+	}
+}

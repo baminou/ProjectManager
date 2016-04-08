@@ -1,0 +1,13 @@
+package controller;
+
+public class SyncController {
+	
+	private SyncView _view;
+	private SyncModel _model;
+
+	public void show() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

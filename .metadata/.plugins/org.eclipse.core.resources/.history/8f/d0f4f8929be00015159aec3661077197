@@ -1,0 +1,299 @@
+package view;
+
+import javax.swing.JPanel;
+
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.factories.FormFactory;
+
+import epi.JTextFieldNoSymbol;
+
+import javax.swing.AbstractListModel;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+
+import java.awt.Dimension;
+
+import javax.swing.border.EmptyBorder;
+
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.BorderLayout;
+import java.util.Vector;
+
+import javax.swing.JButton;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+
+public class GeneralInfoView extends JPanel {
+	private static final long serialVersionUID = -4333625935409757870L;
+	
+	private static GeneralInfoView instance = null;
+	
+	public static GeneralInfoView getInstance(){
+		if(instance == null){
+			instance = new GeneralInfoView();
+		}
+		return instance;
+	}
+	
+	protected GeneralInfoView() {
+		setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		setBackground(new Color(169, 169, 169));
+		setMinimumSize(new Dimension(0, 0));
+		setMaximumSize(new Dimension(0, 0));
+		setLayout(new BorderLayout(0, 0));
+		
+		
+		_subProjectPanel.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(30dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(28dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,}));
+
+		_subProjectPanel.add(_titleLbl, "2, 2, right, default");
+		_subProjectPanel.add(_titleTxtField, "4, 2, fill, default");
+		_subProjectPanel.add(_speciesLbl, "2, 4, right, default");
+		_subProjectPanel.add(_speciesComboBox, "4, 4, center, default");
+		_subProjectPanel.add(_descriptionLbl, "2, 6, right, default");
+		_subProjectPanel.add(_descriptionTxtField, "4, 6, fill, default");
+		_subProjectPanel.add(_summaryLbl, "2, 8, right, default");
+		_subProjectPanel.add(_summaryScrollPane, "4, 8, fill, fill");
+		_subProjectPanel.add(_overallDesignLbl, "2, 10, right, default");
+		_subProjectPanel.add(_overallDesignScrollPane, "4, 10, fill, fill");
+		_subProjectPanel.add(_contributorLbl, "2, 12, right, default");
+		_subProjectPanel.add(_contributorTxtField, "4, 12, fill, default");
+		_subProjectPanel.add(_experimentLbl, "2, 14, right, default");
+		_subProjectPanel.add(new JScrollPane(_experimentList), "4, 14");
+		add(_subProjectPanel);
+		
+		add(_creationPanel, BorderLayout.NORTH);
+		_creationPanel.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("226px:grow"),},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("29px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,}));
+		
+		_creationPanel.add(_selectExistingProjectBtn, "1, 2, fill, top");
+		
+		_creationPanel.add(panel, "1, 4, fill, fill");
+		panel.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,}));
+		_projectTitleLbl.setFont(new Font("Arial", Font.PLAIN, 10));
+		_projectTitleLbl.setForeground(new Color(30, 144, 255));
+		panel.add(_projectTitleLbl, "2, 2, right, default");
+		_projectTitle.setForeground(new Color(100, 149, 237));
+		_projectTitle.setFont(new Font("Arial", Font.BOLD, 10));
+		
+		panel.add(_projectTitle, "4, 2");
+		_projectYearLbl.setFont(new Font("Arial", Font.PLAIN, 10));
+		_projectYearLbl.setForeground(new Color(30, 144, 255));
+		panel.add(_projectYearLbl, "2, 4, right, default");
+		_projectYear.setForeground(new Color(100, 149, 237));
+		_projectYear.setFont(new Font("Arial", Font.BOLD, 10));
+		
+		panel.add(_projectYear, "4, 4");
+		_projectVersionLbl.setFont(new Font("Arial", Font.PLAIN, 10));
+		_projectVersionLbl.setForeground(new Color(30, 144, 255));
+		panel.add(_projectVersionLbl, "2, 6, right, default");
+		_projectVersionLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		_projectVersion.setForeground(new Color(100, 149, 237));
+		_projectVersion.setFont(new Font("Arial", Font.BOLD, 10));
+		
+		panel.add(_projectVersion, "4, 6");
+		
+		_creationPanel.add(_resetBtn, "1, 6, center, default");
+		_msgLabel.setFont(new Font("Arial", Font.PLAIN, 10));
+		_msgLabel.setForeground(new Color(255, 0, 0));
+		
+		_creationPanel.add(_msgLabel, "1, 8, center, default");
+		_experimentNameLbl.setBorder(new EmptyBorder(5, 0, 5, 0));
+		_experimentNameLbl.setForeground(Color.BLACK);
+		_experimentNameLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_experimentNameLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		add(_experimentNameLbl, BorderLayout.SOUTH);
+		_initTips();
+	}
+	
+	private void _initTips(){
+		this._titleTxtField.setToolTipText("Provide a unique title that describes the overall study.");
+		this._titleLbl.setToolTipText("Provide a unique title that describes the overall study.");
+		this._speciesComboBox.setToolTipText("Select the corresponding species for the experiment.");
+		this._speciesLbl.setToolTipText("Select the corresponding species for the experiment.");
+		this._descriptionTxtField.setToolTipText("Enter 2-3 words describing the content of the folder. Ex: Blood Sample.");
+		this._descriptionLbl.setToolTipText("Enter 2-3 words describing the content of the folder. Ex: Blood Sample.");
+		this._summaryTextArea.setToolTipText("Provide a thorough description of the goals and objectives of this study. The abstract from the associated publication may be suitable. Multiple summary lines can be included.");
+		this._summaryLbl.setToolTipText("Provide a thorough description of the goals and objectives of this study. The abstract from the associated publication may be suitable. Multiple summary lines can be included.");
+		this._overallDesignTxtArea.setToolTipText("Provide a description of the experimental design.Indicate how many Samples are analyzed, if replicates are included, are there control and/or reference Samples, dye-swaps, etc... Multiple lines can be included.");
+		this._overallDesignLbl.setToolTipText("Provide a description of the experimental design.Indicate how many Samples are analyzed, if replicates are included, are there control and/or reference Samples, dye-swaps, etc... Multiple lines can be included.");
+		this._contributorTxtField.setToolTipText("Enter the name of all contributors separated by semicolon. Ex. Spider Man;Super Man;Spongebob SquarePants.");
+		this._contributorLbl.setToolTipText("Enter the name of all contributors separated by semicolon. Ex. Spider Man;Super Man;Spongebob SquarePants.");
+	}
+
+	public JComboBox get_speciesComboBox() {
+		return _speciesComboBox;
+	}
+
+	public JLabel get_experimentNameLbl() {
+		return _experimentNameLbl;
+	}
+
+	public JLabel get_msgLabel() {
+		return _msgLabel;
+	}
+
+	public JTextField get_titleTxtField() {
+		return _titleTxtField;
+	}
+	
+	public JTextField get_descriptionTxtField() {
+		return _descriptionTxtField;
+	}
+
+	public JLabel get_titleLbl() {
+		return _titleLbl;
+	}
+
+	public JLabel get_speciesLbl() {
+		return _speciesLbl;
+	}
+
+	public JLabel get_descriptionLbl() {
+		return _descriptionLbl;
+	}
+
+	public JLabel get_summaryLbl() {
+		return _summaryLbl;
+	}
+
+	public JTextArea get_summaryTextArea() {
+		return _summaryTextArea;
+	}
+
+	public JScrollPane get_summaryScrollPane() {
+		return _summaryScrollPane;
+	}
+
+	public JLabel get_overallDesignLbl() {
+		return _overallDesignLbl;
+	}
+
+	public JTextArea get_overallDesignTxtArea() {
+		return _overallDesignTxtArea;
+	}
+
+	public JScrollPane get_overallDesignScrollPane() {
+		return _overallDesignScrollPane;
+	}
+
+	public JLabel get_contributorLbl() {
+		return _contributorLbl;
+	}
+
+	public JTextField get_contributorTxtField() {
+		return _contributorTxtField;
+	}
+
+	public JList get_experimentList() {
+		return _experimentList;
+	}
+
+	public JLabel get_experimentLbl() {
+		return _experimentLbl;
+	}
+
+	public JPanel get_subProjectPanel() {
+		return _subProjectPanel;
+	}
+
+	public JPanel get_creationPanel() {
+		return _creationPanel;
+	}
+
+	public JButton get_selectExistingProjectBtn() {
+		return _selectExistingProjectBtn;
+	}
+
+	public JLabel get_projectTitleLbl() {
+		return _projectTitleLbl;
+	}
+
+	public JLabel get_yearLbl() {
+		return _projectYearLbl;
+	}
+
+	public JLabel get_projectYearLbl() {
+		return _projectYearLbl;
+	}
+
+	public JLabel get_projectVersionLbl() {
+		return _projectVersionLbl;
+	}
+
+	public JLabel getLblVersion() {
+		return _projectVersionLbl;
+	}
+
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public JLabel get_projectTitle() {
+		return _projectTitle;
+	}
+
+	public JLabel get_projectYear() {
+		return _projectYear;
+	}
+
+	public JLabel get_projectVersion() {
+		return _projectVersion;
+	}
+
+	public JButton get_resetBtn() {
+		return _resetBtn;
+	}
+}

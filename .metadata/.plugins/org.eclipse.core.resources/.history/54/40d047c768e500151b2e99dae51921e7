@@ -1,0 +1,380 @@
+package view;
+
+import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+public abstract class SpecificProjectView extends JPanel {
+	protected final JLabel _growthProtocolLbl = new JLabel("Growth Protocol");
+	protected final JTextArea _growthProtocolTxtArea = new JTextArea();
+	protected final JScrollPane _growthProtocolScrollPane = new JScrollPane(_growthProtocolTxtArea);
+	protected final JLabel _hybProtocolLbl = new JLabel("Hyb Protocol");
+	protected final JTextArea _hybProtocolTxtArea = new JTextArea();
+	protected final JScrollPane _hybProtocolScrollPane = new JScrollPane(_hybProtocolTxtArea);
+	protected final JLabel _treatmentProtocolLbl = new JLabel("Treatment Protocol");
+	protected final JTextArea _treatmentProtocolTxtArea = new JTextArea();
+	protected final JScrollPane _treatmentProtocolScrollPane = new JScrollPane(_treatmentProtocolTxtArea);
+	protected final JLabel _extractProtocolLbl = new JLabel("Extract Protocol");
+	protected final JTextArea _extractProtocolTxtArea = new JTextArea();
+	protected final JScrollPane _extractProtocolScrollPane = new JScrollPane(_extractProtocolTxtArea);
+	protected final JLabel _labelProtocolLbl = new JLabel("Label Protocol");
+	protected final JTextArea _labelProtocolTxtArea = new JTextArea();
+	protected final JScrollPane _labelProtocolScrollPane = new JScrollPane(_labelProtocolTxtArea);
+	protected final JLabel _dataProcessingLbl = new JLabel("Data Processing");
+	protected final JTextArea _dataProcessingTxtArea = new JTextArea();
+	protected final JScrollPane _dataProcessingScrollPane = new JScrollPane(_dataProcessingTxtArea);
+	protected final JLabel _scanProtocolLbl = new JLabel("Scan Protocol");
+	protected final JTextArea _scanProtocolTxtArea = new JTextArea();
+	protected final JScrollPane _scanProtocolScrollPane = new JScrollPane(_scanProtocolTxtArea);
+	protected final JLabel _platformLbl = new JLabel("Platform");
+	protected final JTextField _platformTxtField = new JTextField();
+	protected final JLabel _valueDefinitionLbl = new JLabel("Value Definition");
+	protected final JTextArea _valueDefinitionTxtArea = new JTextArea();
+	protected final JScrollPane _valueDefinitionScrollPane = new JScrollPane(_valueDefinitionTxtArea);
+	protected final JLabel _additionalResultsFilesLbl = new JLabel("Additional Results Files");
+	protected final JTextArea _additionalResultsFilesTxtArea = new JTextArea();
+	protected final JScrollPane _additionalResultsFilesScrollPane = new JScrollPane(_additionalResultsFilesTxtArea);
+	protected final JLabel _resultsFileDescriptionsLbl = new JLabel("Results File Descriptions");
+	protected final JTextArea _resultsFileDescriptionTxtArea = new JTextArea();
+	protected final JScrollPane _resultsFileDescriptionScrollPane = new JScrollPane(_resultsFileDescriptionTxtArea);
+	protected final JLabel _matrixProcessedLbl = new JLabel("<html>Matrix processed<br/>value definition</html>");
+	protected final JLabel _matrixSignalLbl = new JLabel("<html># matrix signal<br/>intensities value<br/>definition</html>");
+	protected final JTextArea _matrixProcessedTxtArea = new JTextArea();
+	protected final JScrollPane _matrixProcessedScrollPane = new JScrollPane(_matrixProcessedTxtArea);
+	protected final JTextArea _matrixSignalTxtArea = new JTextArea();
+	protected final JScrollPane _matrixSignalScrollPane = new JScrollPane(_matrixSignalTxtArea);
+	protected final JLabel _libraryConstructionProtocolLbl = new JLabel("<html>Library Construction<br/>Protocol</html>");
+	protected final JTextArea _libraryConstructionTxtArea = new JTextArea();
+	protected final JScrollPane _libraryConstructionScrollPane = new JScrollPane(_libraryConstructionTxtArea);
+	protected final JLabel _libraryStrategyLbl = new JLabel("Library Strategy");
+	protected final JTextArea _libraryStrategyTxtArea = new JTextArea();
+	protected final JScrollPane _libraryStrategyScrollPane = new JScrollPane(_libraryStrategyTxtArea);
+	protected final JLabel _genomeBuildLbl = new JLabel("Genome Build");
+	protected final JTextArea _genomeBuildTxtArea = new JTextArea();
+	protected final JScrollPane _genomeBuildScrollPane = new JScrollPane(_genomeBuildTxtArea);
+
+	public SpecificProjectView(){
+		_platformLbl.setForeground(Color.RED);
+		_platformLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_platformLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		_platformLbl.setToolTipText("Enter the used platform.");
+		
+		_platformTxtField.setFont(new Font("Arial", Font.PLAIN, 12));
+		_platformTxtField.setColumns(10);
+		_platformTxtField.setToolTipText("Enter the used platform.");
+		
+		_growthProtocolLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_growthProtocolLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		_growthProtocolTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_growthProtocolTxtArea.setLineWrap(true);
+		_growthProtocolTxtArea.setWrapStyleWord(true);
+		_growthProtocolTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		
+		_treatmentProtocolLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_treatmentProtocolLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		_treatmentProtocolTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_treatmentProtocolTxtArea.setWrapStyleWord(true);
+		_treatmentProtocolTxtArea.setLineWrap(true);
+		_treatmentProtocolTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		
+		_extractProtocolLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_extractProtocolLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		_extractProtocolTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_extractProtocolTxtArea.setLineWrap(true);
+		_extractProtocolTxtArea.setWrapStyleWord(true);
+		_extractProtocolTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		
+		_labelProtocolTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_labelProtocolTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		_labelProtocolTxtArea.setToolTipText("Describe the protocol used to label the extract.");
+		_labelProtocolLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_labelProtocolLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		_labelProtocolLbl.setToolTipText("Describe the protocol used to label the extract.");
+		
+		_dataProcessingLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_dataProcessingLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		_dataProcessingTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_dataProcessingTxtArea.setWrapStyleWord(true);
+		_dataProcessingTxtArea.setLineWrap(true);
+		_dataProcessingTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		
+		_valueDefinitionTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_valueDefinitionTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		_valueDefinitionTxtArea.setToolTipText("Provide a short description for the values in the 'Matrix normalized' sheet (eg., XYZ-software computed normalized signal) and in the 'Fold Change' sheet (eg. mature DC / immature DC)");
+		_valueDefinitionLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_valueDefinitionLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		_valueDefinitionLbl.setToolTipText("Provide a short description for the values in the 'Matrix normalized' sheet (eg., XYZ-software computed normalized signal) and in the 'Fold Change' sheet (eg. mature DC / immature DC)");
+		
+		_resultsFileDescriptionTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		_resultsFileDescriptionTxtArea.setWrapStyleWord(true);
+		_resultsFileDescriptionTxtArea.setLineWrap(true);
+		_resultsFileDescriptionTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		
+		_additionalResultsFilesTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		_additionalResultsFilesTxtArea.setWrapStyleWord(true);
+		_additionalResultsFilesTxtArea.setLineWrap(true);
+		_additionalResultsFilesTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_additionalResultsFilesLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		
+		_hybProtocolLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_hybProtocolLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		
+		_hybProtocolTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_hybProtocolTxtArea.setWrapStyleWord(true);
+		_hybProtocolTxtArea.setLineWrap(true);
+		_hybProtocolTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		
+		_scanProtocolLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_scanProtocolLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		
+		_scanProtocolTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_scanProtocolTxtArea.setWrapStyleWord(true);
+		_scanProtocolTxtArea.setLineWrap(true);
+		_scanProtocolTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		
+
+		_matrixProcessedTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_matrixProcessedTxtArea.setWrapStyleWord(true);
+		_matrixProcessedTxtArea.setLineWrap(true);
+		_matrixProcessedTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		_matrixProcessedTxtArea.setToolTipText("Provide a short description for the values in the matrix table, for example: XYZ-software computed normalized signal intensity.");
+		_matrixProcessedLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_matrixProcessedLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		_matrixProcessedLbl.setToolTipText("Provide a short description for the values in the matrix table, for example: XYZ-software computed normalized signal intensity.");
+		
+		_matrixSignalLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_matrixSignalLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		_matrixSignalLbl.setToolTipText("Unmethylated and methylated signal intensities.");
+		_matrixSignalTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_matrixSignalTxtArea.setWrapStyleWord(true);
+		_matrixSignalTxtArea.setLineWrap(true);
+		_matrixSignalTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		_matrixSignalTxtArea.setToolTipText("Unmethylated and methylated signal intensities.");
+		
+		_libraryConstructionTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_libraryConstructionTxtArea.setLineWrap(true);
+		_libraryConstructionTxtArea.setWrapStyleWord(true);
+		_libraryConstructionTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		_libraryConstructionTxtArea.setToolTipText("Describe the library construction protocol.");
+		
+		_libraryConstructionProtocolLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_libraryConstructionProtocolLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		_libraryConstructionProtocolLbl.setToolTipText("Describe the library construction protocol.");
+		
+		_libraryStrategyTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_libraryStrategyTxtArea.setLineWrap(true);
+		_libraryStrategyTxtArea.setWrapStyleWord(true);
+		_libraryStrategyTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		_libraryStrategyTxtArea.setToolTipText("A Short Read Archive-specific field that describes the sequencing technique for this library. (RNA-seq, miRNA-seq, ...)");
+		_libraryStrategyLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_libraryStrategyLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		_libraryStrategyLbl.setToolTipText("A Short Read Archive-specific field that describes the sequencing technique for this library. (RNA-seq, miRNA-seq, ...)");
+	
+		_genomeBuildTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_genomeBuildTxtArea.setLineWrap(true);
+		_genomeBuildTxtArea.setWrapStyleWord(true);
+		_genomeBuildTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		_genomeBuildTxtArea.setToolTipText("UCSC or NCBI genombe build number (e.g hg18, mm9, human NCBI genome build 36, etc...), or reference sequence used for read alignment.");
+		_genomeBuildLbl.setToolTipText("UCSC or NCBI genombe build number (e.g hg18, mm9, human NCBI genome build 36, etc...), or reference sequence used for read alignment.");
+		_genomeBuildLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_genomeBuildLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+	}
+	
+	
+	public JLabel get_growthProtocolLbl() {
+		return _growthProtocolLbl;
+	}
+	public JTextArea get_growthProtocolTxtArea() {
+		return _growthProtocolTxtArea;
+	}
+	public JScrollPane get_growthProtocolScrollPane() {
+		return _growthProtocolScrollPane;
+	}
+	public JLabel get_hybProtocolLbl() {
+		return _hybProtocolLbl;
+	}
+	public JTextArea get_hybProtocolTxtArea() {
+		return _hybProtocolTxtArea;
+	}
+	public JScrollPane get_hybProtocolScrollPane() {
+		return _hybProtocolScrollPane;
+	}
+
+
+	public JLabel get_treatmentProtocolLbl() {
+		return _treatmentProtocolLbl;
+	}
+
+
+	public JTextArea get_treatmentProtocolTxtArea() {
+		return _treatmentProtocolTxtArea;
+	}
+
+
+	public JScrollPane get_treatmentProtocolScrollPane() {
+		return _treatmentProtocolScrollPane;
+	}
+
+
+	public JLabel get_extractProtocolLbl() {
+		return _extractProtocolLbl;
+	}
+
+
+	public JTextArea get_extractProtocolTxtArea() {
+		return _extractProtocolTxtArea;
+	}
+
+
+	public JScrollPane get_extractProtocolScrollPane() {
+		return _extractProtocolScrollPane;
+	}
+
+
+	public JLabel get_labelProtocolLbl() {
+		return _labelProtocolLbl;
+	}
+
+
+	public JTextArea get_labelProtocolTxtArea() {
+		return _labelProtocolTxtArea;
+	}
+
+
+	public JScrollPane get_labelProtocolScrollPane() {
+		return _labelProtocolScrollPane;
+	}
+
+
+	public JLabel get_dataProcessingLbl() {
+		return _dataProcessingLbl;
+	}
+
+
+	public JTextArea get_dataProcessingTxtArea() {
+		return _dataProcessingTxtArea;
+	}
+
+
+	public JScrollPane get_dataProcessingScrollPane() {
+		return _dataProcessingScrollPane;
+	}
+
+
+	public JLabel get_scanProtocolLbl() {
+		return _scanProtocolLbl;
+	}
+
+
+	public JTextArea get_scanProtocolTxtArea() {
+		return _scanProtocolTxtArea;
+	}
+
+
+	public JScrollPane get_scanProtocolScrollPane() {
+		return _scanProtocolScrollPane;
+	}
+
+
+	public JLabel get_platformLbl() {
+		return _platformLbl;
+	}
+
+
+	public JTextField get_platformTxtField() {
+		return _platformTxtField;
+	}
+
+
+	public JLabel get_valueDefinitionLbl() {
+		return _valueDefinitionLbl;
+	}
+
+
+	public JTextArea get_valueDefinitionTxtArea() {
+		return _valueDefinitionTxtArea;
+	}
+
+
+	public JScrollPane get_valueDefinitionScrollPane() {
+		return _valueDefinitionScrollPane;
+	}
+
+
+	public JLabel get_additionalResultsFilesLbl() {
+		return _additionalResultsFilesLbl;
+	}
+
+
+	public JTextArea get_additionalResultsFilesTxtArea() {
+		return _additionalResultsFilesTxtArea;
+	}
+
+
+	public JScrollPane get_additionalResultsFilesScrollPane() {
+		return _additionalResultsFilesScrollPane;
+	}
+
+
+	public JLabel get_resultsFileDescriptionsLbl() {
+		return _resultsFileDescriptionsLbl;
+	}
+
+
+	public JTextArea get_resultsFileDescriptionTxtArea() {
+		return _resultsFileDescriptionTxtArea;
+	}
+
+
+	public JScrollPane get_resultsFileDescriptionScrollPane() {
+		return _resultsFileDescriptionScrollPane;
+	}
+
+
+	public JLabel get_matrixProcessedLbl() {
+		return _matrixProcessedLbl;
+	}
+
+
+	public JLabel get_matrixSignalLbl() {
+		return _matrixSignalLbl;
+	}
+
+
+	public JTextArea get_matrixProcessedTxtArea() {
+		return _matrixProcessedTxtArea;
+	}
+
+
+	public JScrollPane get_matrixProcessedScrollPane() {
+		return _matrixProcessedScrollPane;
+	}
+
+
+	public JTextArea get_matrixSignalTxtArea() {
+		return _matrixSignalTxtArea;
+	}
+
+
+	public JScrollPane get_matrixSignalScrollPane() {
+		return _matrixSignalScrollPane;
+	}
+	
+	public void enable(){
+		this._additionalResultsFilesTxtArea.setEnabled(true);
+		this._dataProcessingTxtArea.setEnabled(true);
+		this._extractProtocolTxtArea.setEnabled(true);
+		this._growthProtocolTxtArea.setEnabled(true);
+		this._hybProtocolTxtArea.setEnabled(true);
+		this._labelProtocolTxtArea.setEnabled(true);
+		this._matrixProcessedTxtArea.setEnabled(true);
+		this._matrixSignalTxtArea.setEnabled(true);
+	}
+}

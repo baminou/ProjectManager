@@ -1,0 +1,12 @@
+package app;
+
+public class Tree<T> {
+	
+	private Node<T> root;
+	
+	private class Node<T> {
+		private T data;
+		private Node<T> parent;
+	}
+
+}

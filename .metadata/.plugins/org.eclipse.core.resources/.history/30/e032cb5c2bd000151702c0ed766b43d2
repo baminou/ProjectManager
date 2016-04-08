@@ -1,0 +1,102 @@
+package model;
+
+import epi.Project;
+
+public class GeneralInfoModel {
+	protected int _id;
+	protected int _project_id;
+	protected String _title;
+	protected String _species;
+	protected String _description;
+	protected String _summary;
+	protected String _overall_design;
+	protected String _contributor;
+	protected String _experiment;
+	private String _current_absolute_path;
+	private Project _project;
+	private SelectExistingProjectController _selecProjectController;
+
+	public Project get_project() {
+		return _project;
+	}
+
+	public void set_project(Project _project) {
+		this._project = _project;
+	}
+
+	public String get_current_absolute_path() {
+		return _current_absolute_path;
+	}
+
+	public void set_current_absolute_path(String _current_absolute_path) {
+		this._current_absolute_path = _current_absolute_path;
+	}
+	private static GeneralInfoModel instance = null;
+	
+	public static GeneralInfoModel getInstance(){
+		if(instance == null){
+			instance = new GeneralInfoModel();
+		}
+		return instance;
+	}
+	
+	private GeneralInfoModel(){
+		
+	}
+
+	public int get_id() {
+		return _id;
+	}
+	public void set_id(int _id) {
+		this._id = _id;
+	}
+	public int get_project_id() {
+		return _project_id;
+	}
+	public void set_project_id(int _project_id) {
+		this._project_id = _project_id;
+	}
+	public String get_title() {
+		return _title;
+	}
+	public void set_title(String _title) {
+		this._title = _title;
+	}
+	public String get_species() {
+		return _species;
+	}
+	public void set_species(String _species) {
+		this._species = _species;
+	}
+	public String get_description() {
+		return _description;
+	}
+	public void set_description(String _description) {
+		this._description = _description;
+	}
+	public String get_summary() {
+		return _summary;
+	}
+
+	public void set_summary(String _summary) {
+		this._summary = _summary;
+	}
+	public String get_overall_design() {
+		return _overall_design;
+	}
+	public void set_overall_design(String _overall_design) {
+		this._overall_design = _overall_design;
+	}
+	public String get_contributor() {
+		return _contributor;
+	}
+	public void set_contributor(String _contributor) {
+		this._contributor = _contributor;
+	}
+	public String get_experiment() {
+		return _experiment;
+	}
+	public void set_experiment(String _experiment) {
+		this._experiment = _experiment;
+	}
+}

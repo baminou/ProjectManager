@@ -1,0 +1,27 @@
+package app;
+
+import java.util.Calendar;
+
+public class Generic extends SubProject {
+	
+	private String _platform;
+	private String _additionalResultsFiles;
+	private String _resultsFileDescriptions;
+	
+	public Generic(int _id, Calendar _creation_date, String _title,
+			String _species, String _description, Project _project,
+			String _summary, String _overall_design, String _contributors,
+			String _experiment, String _growthProtocol,
+			String _treatmentProtocol, String _extractProtocol,
+			String _dataProcessing, String platform, String additionalResultsFiles,
+			String resultsFileDescriptions) throws ConventionException {
+		super(_id, _creation_date, _title, _species, _description, _project, _summary,
+				_overall_design, _contributors, _experiment, _growthProtocol,
+				_treatmentProtocol, _extractProtocol, _dataProcessing);
+		_platform = platform;
+		_additionalResultsFiles = additionalResultsFiles;
+		_resultsFileDescriptions = resultsFileDescriptions;
+	}
+	
+
+}

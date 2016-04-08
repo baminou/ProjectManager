@@ -1,0 +1,6 @@
+username=epi_admin
+password=epinetwork250college
+archive_drive=/EPIGENETICS/ARCHIVE/
+scratch_drive=/EPIGENETICS/SCRATCH/
+archive_directory=SBS_USER
+scratch_directory=SBS_USER

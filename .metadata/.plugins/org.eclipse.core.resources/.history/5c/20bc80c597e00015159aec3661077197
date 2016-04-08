@@ -1,0 +1,95 @@
+package controller;
+
+import java.io.IOException;
+import java.rmi.NotBoundException;
+import java.util.Calendar;
+
+import app.PCR;
+import view.GeneralInfoView;
+import view.PCRView;
+import epi.ServerInterface;
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+
+public class PCRController extends SpecificProjectController {
+	
+	private PCRView _view;
+	
+	private static PCRController instance = null;
+	
+	private PCRController(){
+		super();
+		_view = PCRView.getInstance();
+		
+		_view.get_generateBtn().addActionListener(new GenerateActionListener());
+	}
+	
+	public static PCRController getInstance(){
+		if(instance==null){
+			instance = new PCRController();
+		}
+		return instance;
+	}
+
+	public void set_view(PCRView _view) {
+		this._view = _view;
+	}
+
+	@Override
+	public void experimentListChange(int index, String value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void reset() {
+		_view.get_platformTxtField().setText(null);
+		_view.get_labelProtocolTxtArea().setText(null);
+		_view.get_valueDefinitionTxtArea().setText(null);
+		_view.get_dataProcessingTxtArea().setText(null);
+		_view.get_extractProtocolTxtArea().setText(null);
+		_view.get_growthProtocolTxtArea().setText(null);
+		_view.get_treatmentProtocolTxtArea().setText(null);
+	}
+
+
+	@Override
+	public GeneralInfoView get_view() {
+		return _view;
+	}
+
+	@Override
+	public void enable() {
+		_view.get_platformTxtField().setEnabled(true);
+		_view.get_labelProtocolTxtArea().setEnabled(true);
+		_view.get_valueDefinitionTxtArea().setEnabled(true);
+		_view.get_dataProcessingTxtArea().setEnabled(true);
+		_view.get_extractProtocolTxtArea().setEnabled(true);
+		_view.get_growthProtocolTxtArea().setEnabled(true);
+		_view.get_treatmentProtocolTxtArea().setEnabled(true);
+	}
+
+	@Override
+	public void disable() {
+		_view.get_platformTxtField().setEnabled(false);
+		_view.get_labelProtocolTxtArea().setEnabled(false);
+		_view.get_valueDefinitionTxtArea().setEnabled(false);
+		_view.get_dataProcessingTxtArea().setEnabled(false);
+		_view.get_extractProtocolTxtArea().setEnabled(false);
+		_view.get_growthProtocolTxtArea().setEnabled(false);
+		_view.get_treatmentProtocolTxtArea().setEnabled(false);
+	}
+
+	@Override
+	public void generate() throws IOException, RowsExceededException, WriteException, BiffException, NotBoundException, app.ConventionException {
+		PCR pcr = new PCR(-1,Calendar.getInstance(),_view.get_titleTxtField().getText(),GeneralInfoView.getInstance().get_speciesComboBox().getSelectedItem().toString(),
+				_view.get_descriptionTxtField().getText(),GeneralInfoController.getInstance().get_project(),_view.get_summaryTextArea().getText(),
+				_view.get_overallDesignTxtArea().getText(),_view.get_contributorTxtField().getText(),_view.get_experimentList().getSelectedValue().toString(),
+				_view.get_growthProtocolTxtArea().getText(),_view.get_treatmentProtocolTxtArea().getText(),
+				_view.get_extractProtocolTxtArea().getText(),_view.get_dataProcessingTxtArea().getText(),
+				_view.get_platformTxtField().getText(),_view.get_labelProtocolTxtArea().getText(),_view.get_valueDefinitionTxtArea().getText());
+		
+		ServerInterface.getInstance().get_stub().createPCRDirectory(pcr);
+	}
+}

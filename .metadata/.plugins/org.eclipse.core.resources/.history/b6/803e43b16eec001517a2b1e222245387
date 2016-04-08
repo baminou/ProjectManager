@@ -1,0 +1,83 @@
+package app;
+
+import java.util.Calendar;
+
+public class Generic extends SubProject {
+	
+	private String _platform;
+	private String _additionalResultsFiles;
+	private String _resultsFileDescriptions;
+	private String _labelProtocol;
+	private String _hybProtocol;
+	private String _scanProtocol;
+	
+	public Generic(int _id, Calendar _creation_date, String _title,
+			String _species, String _description, Project _project,
+			String _summary, String _overall_design, String _contributors,
+			String _experiment, String _growthProtocol,
+			String _treatmentProtocol, String _extractProtocol,
+			String _dataProcessing, String platform, String additionalResultsFiles,
+			String labelProtocol, String hybProtocol, String resultsFileDescriptions,
+			String scan_protocol) throws ConventionException {
+		super(_id, _creation_date, _title, _species, _description, _project, _summary,
+				_overall_design, _contributors, _experiment, _growthProtocol,
+				_treatmentProtocol, _extractProtocol, _dataProcessing);
+		this.set_labelProtocol(labelProtocol);
+		this.set_hybProtocol(hybProtocol);
+		this.set_platform(platform);_platform = platform;
+		this.set_additionalResultsFiles(additionalResultsFiles);
+		this.set_resultsFileDescriptions(resultsFileDescriptions);
+		this.set_scanProtocol(scan_protocol);
+	}
+
+	public String get_platform() {
+		return _platform;
+	}
+
+	public void set_platform(String _platform) {
+		if(platform==null)
+		this._platform = _platform;
+	}
+
+	public String get_additionalResultsFiles() {
+		return _additionalResultsFiles;
+	}
+
+	public void set_additionalResultsFiles(String _additionalResultsFiles) {
+		this._additionalResultsFiles = _additionalResultsFiles;
+	}
+
+	public String get_resultsFileDescriptions() {
+		return _resultsFileDescriptions;
+	}
+
+	public void set_resultsFileDescriptions(String _resultsFileDescriptions) {
+		this._resultsFileDescriptions = _resultsFileDescriptions;
+	}
+
+
+	public String get_labelProtocol() {
+		return _labelProtocol;
+	}
+
+
+	public void set_labelProtocol(String _labelProtocol) {
+		this._labelProtocol = _labelProtocol;
+	}
+
+	public String get_hybProtocol() {
+		return _hybProtocol;
+	}
+
+	public void set_hybProtocol(String _hybProtocol) {
+		this._hybProtocol = _hybProtocol;
+	}
+
+	public String get_scanProtocol() {
+		return _scanProtocol;
+	}
+
+	public void set_scanProtocol(String _scanProtocol) {
+		this._scanProtocol = _scanProtocol;
+	}
+}

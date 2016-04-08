@@ -1,0 +1,4 @@
+username=epi_admin
+password=/mnt/dell/apetronis
+archive_directory=/EPIGENETICS/ARCHIVE/SBS_USER
+scratch_directory=/EPIGENETICS/SCRATCH/SBS_USER

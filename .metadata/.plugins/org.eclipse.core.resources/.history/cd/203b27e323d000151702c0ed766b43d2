@@ -1,0 +1,6 @@
+package epi;
+
+public class Server {
+	private String _ip;
+	private int _port;
+}

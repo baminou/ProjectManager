@@ -1,0 +1,35 @@
+package app;
+
+import java.util.Calendar;
+
+public class Generic extends SubProject {
+	
+	private String _platform;
+	private String _additionalResultsFiles;
+	private String _resultsFileDescriptions;
+	
+
+	public String get_platform() {
+		return _platform;
+	}
+
+	public void set_platform(String _platform) {
+		this._platform = _platform;
+	}
+
+	public String get_additionalResultsFiles() {
+		return _additionalResultsFiles;
+	}
+
+	public void set_additionalResultsFiles(String _additionalResultsFiles) {
+		this._additionalResultsFiles = _additionalResultsFiles;
+	}
+
+	public String get_resultsFileDescriptions() {
+		return _resultsFileDescriptions;
+	}
+
+	public void set_resultsFileDescriptions(String _resultsFileDescriptions) {
+		this._resultsFileDescriptions = _resultsFileDescriptions;
+	}
+}

@@ -1,0 +1,21 @@
+package view;
+
+
+public class InfoFields {
+	
+	private static InfoFields instance = null;
+	
+	public static InfoFields get_instance(){
+		if(instance == null){
+			instance = new InfoFields();
+		}
+		return instance;
+	}
+	
+	private InfoFields(){
+		
+
+
+	}
+
+}

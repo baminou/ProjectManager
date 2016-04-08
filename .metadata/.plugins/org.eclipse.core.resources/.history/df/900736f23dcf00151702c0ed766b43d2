@@ -1,0 +1,44 @@
+package controller;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.rmi.NotBoundException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.Properties;
+import java.util.Vector;
+
+import javax.swing.JOptionPane;
+
+import app.ProjectManagerInterface;
+import model.SyncModel;
+import view.SyncView;
+
+public class SyncController {
+	
+	private SyncView _view;
+	private SyncModel _model;
+	
+	public SyncController() throws IOException, NotBoundException{
+		_view = new SyncView();
+		_model = new SyncModel();
+		
+		Properties prop = new Properties();
+		InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties");
+		prop.load(input);
+		
+		Registry registry = LocateRegistry.getRegistry("172.26.37.38",Integer.valueOf(prop.getProperty("port")));
+		ProjectManagerInterface stub = (ProjectManagerInterface) registry.lookup("project_manager");
+		
+		System.out.println("ok");
+		Vector<String> tmp = stub.displayScratchFolder();
+		for(String word : tmp){
+			System.out.println(tmp);
+		}
+	}
+
+	public void show() {
+		int result = JOptionPane.showConfirmDialog(null, _view,"Sync folder",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
+	}
+
+}

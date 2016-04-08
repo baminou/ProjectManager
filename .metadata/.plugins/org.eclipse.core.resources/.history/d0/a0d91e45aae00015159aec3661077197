@@ -1,0 +1,33 @@
+package epi;
+
+import controller.GeneralInfoController;
+import controller.SpecificProjectController;
+
+public abstract class SubProject {
+	protected SpecificProjectController _specificProjectController;
+	protected GeneralInfoController _generalInfoController;
+	
+	public SubProject() {
+		this._generalInfoController = GeneralInfoController.getInstance();
+	}
+	
+	
+	public SpecificProjectController get_specificProjectController() {
+		return _specificProjectController;
+	}
+
+	public void set_specificProjectController(
+			SpecificProjectController _specificProjectController) {
+		this._specificProjectController = _specificProjectController;
+	}
+
+	public GeneralInfoController get_generalInfoController() {
+		return _generalInfoController;
+	}
+
+	public void set_generalInfoController(
+			GeneralInfoController _generalInfoController) {
+		this._generalInfoController = _generalInfoController;
+	}
+	
+}

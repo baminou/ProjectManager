@@ -1,0 +1,133 @@
+package view;
+
+import javax.swing.JPanel;
+
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.factories.FormFactory;
+
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import java.awt.Font;
+
+import javax.swing.border.EmptyBorder;
+
+import java.awt.Color;
+
+import javax.swing.border.TitledBorder;
+import javax.swing.JButton;
+
+public class PCRView extends GeneralInfoView  {
+	
+	protected PCRView() {
+		super();
+		setBorder(new TitledBorder(null, "PCR", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		setBackground(new Color(240, 255, 240));
+		_labelProtocolTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_labelProtocolTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		_valueDefinitionTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_valueDefinitionTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,}));
+		_platformLbl.setForeground(Color.RED);
+		_platformLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_platformLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		
+		
+		add(_platformLbl, "2, 2, right, default");
+		_platformTxtField.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_platformTxtField.setFont(new Font("Arial", Font.PLAIN, 12));
+		add(_platformTxtField, "4, 2, fill, default");
+		_platformTxtField.setColumns(10);
+		add(_growthProtocolLbl, "2, 4");
+		add(_growthProtocolScrollPane, "4, 4, fill, fill");
+		add(_treatmentProtocolLbl, "2, 6");
+		add(_treatmentProtocolScrollPane, "4, 6, fill, fill");
+		add(_extractProtocolLbl, "2, 8");
+		add(_extractProtocolScrollPane, "4, 8, fill, fill");
+		_labelProtocolLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_labelProtocolLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		add(_labelProtocolLbl, "2, 10");
+		add(_labelProtocolScrollPane, "4, 10, fill, fill");
+		add(_dataProcessingLbl, "2, 12");
+		add(_dataProcessingScrollPane, "4, 12, fill, fill");
+		_valueDefinitionLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_valueDefinitionLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		add(_valueDefinitionLbl, "2, 14");
+		add(_valueDefinitionScrollPane, "4, 14, fill, fill");
+		
+		add(_generateBtn, "4, 16");
+		_initTips();
+	}
+
+
+	public JLabel get_platformLbl() {
+		return _platformLbl;
+	}
+
+
+	public JTextField get_platformTxtField() {
+		return _platformTxtField;
+	}
+
+	public JLabel get_labelProtocolLbl() {
+		return _labelProtocolLbl;
+	}
+
+	public JTextArea get_labelProtocolTxtArea() {
+		return _labelProtocolTxtArea;
+	}
+
+	public JScrollPane get_labelProtocolScrollPane() {
+		return _labelProtocolScrollPane;
+	}
+
+	public JLabel get_valueDefinitionLbl() {
+		return _valueDefinitionLbl;
+	}
+
+	public JTextArea get_valueDefinitionTxtArea() {
+		return _valueDefinitionTxtArea;
+	}
+
+	public JScrollPane get_valueDefinitionScrollPane() {
+		return _valueDefinitionScrollPane;
+	}
+
+	protected void _initTips() {
+		/*super._initTips();
+		this._platformLbl.setToolTipText("Enter the used platform.");
+		this._platformTxtField.setToolTipText("Enter the used platform.");
+		this._labelProtocolLbl.setToolTipText("Describe the protocol used to label the extract.");
+		this._labelProtocolTxtArea.setToolTipText("Describe the protocol used to label the extract.");
+		this._valueDefinitionLbl.setToolTipText("Provide a short description for the values in the 'Matrix normalized' sheet (eg., XYZ-software computed normalized signal) and in the 'Fold Change' sheet (eg. mature DC / immature DC)");
+		this._valueDefinitionTxtArea.setToolTipText("Provide a short description for the values in the 'Matrix normalized' sheet (eg., XYZ-software computed normalized signal) and in the 'Fold Change' sheet (eg. mature DC / immature DC)");*/
+	}
+}

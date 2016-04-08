@@ -1,0 +1,11 @@
+package model;
+
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
+
+import app.FileTree;
+
+public class SelectExistingProjectModel {
+	public FileTree getFoldersTree(){
+	}
+}

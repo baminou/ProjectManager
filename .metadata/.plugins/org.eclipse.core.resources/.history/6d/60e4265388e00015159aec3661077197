@@ -1,0 +1,48 @@
+package app;
+
+import java.util.Date;
+
+public class PCR extends SubProject{
+	
+	private String _platform;
+	private String _labelProtocol;
+	private String _valueDefinition;
+
+	public PCR(int _id, Date _creation_date, String _title, String _species,
+			String _description, Project _project, String _summary,
+			String _overall_design, String _contributors, String _experiment,
+			String platform, String labelProtocol, String valueDefinition)
+			throws ConventionException {
+		super(_id, _creation_date, _title, _species, _description, _project, _summary,
+				_overall_design, _contributors, _experiment);
+		_platform = platform;
+		_labelProtocol = labelProtocol;
+		_valueDefinition = valueDefinition;
+	}
+
+	public String get_platform() {
+		return _platform;
+	}
+
+	public void set_platform(String _platform) {
+		this._platform = _platform;
+	}
+
+	public String get_labelProtocol() {
+		return _labelProtocol;
+	}
+
+	public void set_labelProtocol(String _labelProtocol) {
+		this._labelProtocol = _labelProtocol;
+	}
+
+	public String get_valueDefinition() {
+		return _valueDefinition;
+	}
+
+	public void set_valueDefinition(String _valueDefinition) {
+		this._valueDefinition = _valueDefinition;
+	}	
+
+	
+}

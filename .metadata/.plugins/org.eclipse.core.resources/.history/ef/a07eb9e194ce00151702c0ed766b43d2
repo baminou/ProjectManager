@@ -1,0 +1,219 @@
+package controller;
+
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.rmi.AccessException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.Properties;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.Vector;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+
+import app.ProjectManagerImplementation;
+import app.ProjectManagerInterface;
+import epi.ServerViewObserver;
+import model.ServerModel;
+import view.RsyncView;
+import view.ServerView;
+
+public class ServerController {
+	private ServerModel _model;
+	private ServerView _view;
+	private RsyncView _viewSync;
+	private Timer timer = new Timer();
+	private boolean _connected = false;
+	private static ServerController instance = null;
+	private Vector<ServerViewObserver> _observers = new Vector<ServerViewObserver>();
+	
+	public static ServerController getInstance(){
+		if(instance == null){
+			instance = new ServerController();
+		}
+		return instance;
+	}
+	
+	private ServerController() {
+		timer.schedule(new updateServerStatusAction(), 0,1000);
+		_view = new ServerView();
+		_init();
+	}
+	
+	private void _init(){
+		try {
+			Properties prop = new Properties();
+			InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties");
+			prop.load(input);
+			
+			System.setProperty( "java.rmi.server.hostname", "172.19.105.7" );
+			
+			Registry registry = LocateRegistry.getRegistry("172.26.37.38",2003);
+			ProjectManagerInterface stub = (ProjectManagerInterface) registry.lookup("project_manager");
+			
+			System.out.println(stub.getScratchDirectory());
+			System.out.println(stub.getArchiveDirectory());
+			
+			_view.get_ipTxtField().setText(prop.getProperty("ip"));
+			_view.get_scratchTxtField().setText(stub.getScratchDirectory());
+			_view.get_archiveTxtField().setText(stub.getArchiveDirectory());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//_view.get_portTxtField().setText(String.valueOf(_model.get_port()));
+		//_view.get_scratchTxtField().setText();;
+		//_view.get_archiveTxtField().setText(_model.get_archiveSambaFile().getName());
+	}
+	
+	public void init(String ip, int port, String username, String password, String scratch, String archive){
+		Properties prop = new Properties();
+		InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties");
+		
+		try {
+			prop.load(input);
+			Registry registry = LocateRegistry.getRegistry(prop.getProperty("ip"));
+			ProjectManagerImplementation p = (ProjectManagerImplementation) registry.lookup("p");
+			_view.get_scratchTxtField().setText(p.getScratchDirectory());
+		} catch (AccessException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (NotBoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		_model = new ServerModel(ip,port,username,password, scratch, archive);
+		//_view = new ServerView(ip,port,username,password, scratch, archive);
+	}
+	
+	/*public void showSync(){
+		_viewSync = new RsyncView();
+		
+		set_file_list(_model.get_scratchSambaFile(), (DefaultTreeModel)_viewSync.get_scratchTree().getModel());
+		set_file_list(_model.get_archiveSambaFile(), (DefaultTreeModel)_viewSync.get_archiveTree().getModel());
+
+		int result = JOptionPane.showOptionDialog(_view, _viewSync,"Synchronization",JOptionPane.OK_OPTION,JOptionPane.QUESTION_MESSAGE,null,new String[]{"Synchronize"},"default");
+		if(result == JOptionPane.OK_OPTION){
+			try {
+				_model.synchronizeFiles(_viewSync.get_scratchTree().getSelectionPaths());
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SmbException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}*/
+	
+	/*public void set_file_list(SmbFile root_file, DefaultTreeModel model){
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode(root_file.getCanonicalPath());
+		displayDirectoryContents(root, root_file);
+		model.setRoot(root);
+	}
+
+	public static void displayDirectoryContents(DefaultMutableTreeNode root, SmbFile dir) {
+		try {
+			SmbFile[] files = dir.listFiles();
+			for (SmbFile file : files) {
+				if (file.isDirectory()) {
+					DefaultMutableTreeNode tmp = new DefaultMutableTreeNode(file.getName());
+					root.add(tmp);
+					displayDirectoryContents(tmp, file);
+				} else {
+					if(!file.isHidden()){
+						//root.add(new DefaultMutableTreeNode(file.getName()));
+					}
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}*/
+	
+	public void show(){
+		//_view.get_ipTxtField().setText(_model.get_ip());
+		//_view.get_portTxtField().setText(String.valueOf(_model.get_port()));
+		//_view.get_scratchTxtField().setText(_model.get_scratchSambaFile().getName());
+		//_view.get_archiveTxtField().setText(_model.get_archiveSambaFile().getName());
+		boolean inputAccepted = false;
+		while(!inputAccepted){
+			int result = JOptionPane.showConfirmDialog(null, _view,"Server Connection",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
+			if(result==JOptionPane.CANCEL_OPTION) break;
+			if(result==JOptionPane.OK_OPTION){
+				//_model.set_ip(_view.get_ipTxtField().getText());
+				
+				try {
+					//System.out.println(_model.get_scratchSambaFile().getCanonicalPath());
+					inputAccepted = true;
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(_view, e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+					inputAccepted = false;
+					
+				}
+			}
+		}
+	}
+
+	public ServerModel get_model() {
+		return _model;
+	}
+
+	public void set_model(ServerModel _model) {
+		this._model = _model;
+	}
+
+	public ServerView get_view() {
+		return _view;
+	}
+
+	public void set_view(ServerView _view) {
+		this._view = _view;
+	}
+	
+	class updateServerStatusAction extends TimerTask{
+		@Override
+		public void run() {
+			for(ServerViewObserver observer : _observers){
+				observer.changeConnectionStatus();
+			}
+		}
+	}
+
+	public boolean is_connected() {
+		return _connected;
+	}
+
+	public void set_connected(boolean _connected) {
+		this._connected = _connected;
+	}
+
+	public Vector<ServerViewObserver> get_observers() {
+		return _observers;
+	}
+
+	public void set_observers(Vector<ServerViewObserver> _observers) {
+		this._observers = _observers;
+	}
+	
+	
+}

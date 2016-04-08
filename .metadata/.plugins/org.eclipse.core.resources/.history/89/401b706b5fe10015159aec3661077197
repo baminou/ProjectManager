@@ -1,0 +1,156 @@
+package view;
+
+import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.AbstractListModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+
+import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
+
+import epi.JTextFieldNoSymbol;
+
+public class InfoFields {
+	
+	private static InfoFields instance = null;
+	
+	public static InfoFields get_instance(){
+		if(instance == null){
+			instance = new InfoFields();
+		}
+		return instance;
+	}
+	
+	private InfoFields(){
+		
+		_matrixSignalTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_matrixSignalTxtArea.setWrapStyleWord(true);
+		_matrixSignalTxtArea.setLineWrap(true);
+		_matrixSignalTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		_matrixProcessedTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_matrixProcessedTxtArea.setWrapStyleWord(true);
+		_matrixProcessedTxtArea.setLineWrap(true);
+		_matrixProcessedTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		
+		_matrixProcessedLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_matrixProcessedLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		_matrixSignalLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_matrixSignalLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		
+		_hybProtocolTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_hybProtocolTxtArea.setWrapStyleWord(true);
+		_hybProtocolTxtArea.setLineWrap(true);
+		_hybProtocolTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		
+		_scanProtocolLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_scanProtocolLbl.setHorizontalAlignment(SwingConstants.RIGHT);
+		
+		_scanProtocolTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_scanProtocolTxtArea.setWrapStyleWord(true);
+		_scanProtocolTxtArea.setLineWrap(true);
+		_scanProtocolTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		
+		_resultsFileDescriptionTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		_resultsFileDescriptionTxtArea.setWrapStyleWord(true);
+		_resultsFileDescriptionTxtArea.setLineWrap(true);
+		_resultsFileDescriptionTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		_additionalResultsFilesTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
+		_additionalResultsFilesTxtArea.setWrapStyleWord(true);
+		_additionalResultsFilesTxtArea.setLineWrap(true);
+		_additionalResultsFilesTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
+		
+		_additionalResultsFilesLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+		_resultsFileDescriptionsLbl.setFont(new Font("Arial", Font.PLAIN, 12));
+
+	}
+
+	private final JLabel _matrixProcessedLbl = new JLabel("<html>Matrix processed<br/>value definition</html>");
+	private final JLabel _matrixSignalLbl = new JLabel("<html># matrix signal<br/>intensities value<br/>definition</html>");
+	private final JTextArea _matrixProcessedTxtArea = new JTextArea();
+	private final JScrollPane _matrixProcessedScrollPane = new JScrollPane(_matrixProcessedTxtArea);
+	private final JTextArea _matrixSignalTxtArea = new JTextArea();
+	private final JScrollPane _matrixSignalScrollPane = new JScrollPane(_matrixSignalTxtArea);
+
+	private final JLabel _scanProtocolLbl = new JLabel("Scan Protocol");
+	private final JTextArea _scanProtocolTxtArea = new JTextArea();
+	private final JScrollPane _scanProtocolScrollPane = new JScrollPane(_scanProtocolTxtArea);
+	private final JLabel _additionalResultsFilesLbl = new JLabel("Additional Results Files");
+	private final JTextArea _additionalResultsFilesTxtArea = new JTextArea();
+	private final JScrollPane _additionalResultsFilesScrollPane = new JScrollPane(_additionalResultsFilesTxtArea);
+	private final JLabel _resultsFileDescriptionsLbl = new JLabel("Results File Descriptions");
+	private final JTextArea _resultsFileDescriptionTxtArea = new JTextArea();
+	private final JScrollPane _resultsFileDescriptionScrollPane = new JScrollPane(_resultsFileDescriptionTxtArea);
+
+	public JLabel get_additionalResultsFilesLbl() {
+		return _additionalResultsFilesLbl;
+	}
+
+	public JTextArea get_additionalResultsFilesTxtArea() {
+		return _additionalResultsFilesTxtArea;
+	}
+
+	public JScrollPane get_additionalResultsFilesScrollPane() {
+		return _additionalResultsFilesScrollPane;
+	}
+
+	public JLabel get_resultsFileDescriptionsLbl() {
+		return _resultsFileDescriptionsLbl;
+	}
+
+	public JTextArea get_resultsFileDescriptionTxtArea() {
+		return _resultsFileDescriptionTxtArea;
+	}
+
+	public JScrollPane get_resultsFileDescriptionScrollPane() {
+		return _resultsFileDescriptionScrollPane;
+	}
+
+	public JLabel get_matrixProcessedLbl() {
+		return _matrixProcessedLbl;
+	}
+
+	public JLabel get_matrixSignalLbl() {
+		return _matrixSignalLbl;
+	}
+	public JLabel get_scanProtocolLbl() {
+		return _scanProtocolLbl;
+	}
+
+	public JTextArea get_scanProtocolTxtArea() {
+		return _scanProtocolTxtArea;
+	}
+
+	public JScrollPane get_scanProtocolScrollPane() {
+		return _scanProtocolScrollPane;
+	}
+
+	public JTextArea get_matrixProcessedTxtArea() {
+		return _matrixProcessedTxtArea;
+	}
+
+	public JScrollPane get_matrixProcessedScrollPane() {
+		return _matrixProcessedScrollPane;
+	}
+
+	public JTextArea get_matrixSignalTxtArea() {
+		return _matrixSignalTxtArea;
+	}
+
+	public JScrollPane get_matrixSignalScrollPane() {
+		return _matrixSignalScrollPane;
+	}
+}

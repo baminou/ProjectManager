@@ -1,0 +1,65 @@
+package view;
+
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
+import javax.swing.JSplitPane;
+
+import java.awt.BorderLayout;
+
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.JButton;
+
+public class RsyncView extends JPanel {
+	
+	private final JTree _scratchTree = new JTree();
+	private final JSplitPane splitPane;
+	private final JTree _archiveTree = new JTree();
+	private final JPanel _leftPanel = new JPanel();
+	private final JPanel _rightPanel = new JPanel();
+	private final JScrollPane _archiveTreePane = new JScrollPane(_archiveTree);
+	private final JScrollPane _scratchTreePane = new JScrollPane(_scratchTree);
+	
+	public RsyncView() {
+		_archiveTree.setModel(new DefaultTreeModel(
+			new DefaultMutableTreeNode("JTree") {
+				{
+				}
+			}
+		));
+		setLayout(new BorderLayout(0, 0));
+		
+		_scratchTree.setModel(new DefaultTreeModel(
+			new DefaultMutableTreeNode("JTree") {
+				{
+				}
+			}
+		));
+		
+		
+		splitPane = new JSplitPane();
+		//plitPane.setLeftComponent(new JScrollPane(_scratchTree));
+		add(_leftPanel, BorderLayout.WEST);
+		add(_rightPanel, BorderLayout.EAST);
+		
+		_rightPanel.add(_archiveTreePane);
+		_leftPanel.setLayout(new BorderLayout(0, 0));
+		_leftPanel.add(_scratchTreePane);
+	}
+
+	public JTree get_scratchTree() {
+		return _scratchTree;
+	}
+
+	public JSplitPane getSplitPane() {
+		return splitPane;
+	}
+
+	public JTree get_archiveTree() {
+		return _archiveTree;
+	}
+	
+	
+
+}

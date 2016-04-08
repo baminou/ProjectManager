@@ -1,0 +1,14 @@
+package app;
+
+import java.io.IOException;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface ProjectManagerInterface extends Remote{
+	public String getScratchDirectory() throws RemoteException, IOException;
+	public String getArchiveDirectory() throws RemoteException, IOException;
+	public FileTree getScratchTreeStructure() throws RemoteException;
+	public FileTree getArchiveTreeStructure() throws RemoteException;
+	public void displayScratchFolder(File node) throws RemoteException;
+	public void displayArchiveFolder(File node) throws RemoteException;
+}

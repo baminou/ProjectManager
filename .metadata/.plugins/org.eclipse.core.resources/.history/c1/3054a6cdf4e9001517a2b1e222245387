@@ -1,0 +1,40 @@
+package app;
+
+import java.io.IOException;
+import java.rmi.NotBoundException;
+import javax.swing.JOptionPane;
+import controller.CreateProjectController;
+import controller.ServerController;
+import controller.SyncController;
+
+public class Model {
+
+	public Model(){
+		
+		try {
+			_serverController = new ServerController();
+		} catch (IOException | NotBoundException e1) {
+			JOptionPane.showMessageDialog(null, "Connection to the server cannot be established. This may due to an error in the config file, a network issue or a none running instance on the server.", "Server connection error",JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	public void create_new_project(){
+		new CreateProjectController().init();
+	}
+	
+	public void edit_server_status() throws IOException, NotBoundException{
+		new ServerController().show();
+	}
+
+	public void sync_files() throws IOException, NotBoundException {
+		new SyncController().show();
+	}
+
+	public ServerController get_serverController() {
+		return _serverController;
+	}
+
+	public void set_serverController(ServerController _serverController) {
+		this._serverController = _serverController;
+	}
+}

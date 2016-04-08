@@ -1,0 +1,25 @@
+package model;
+
+import app.Project;
+import controller.SelectExistingProjectController;
+
+public class GeneralInfoModel {
+	private Project _project;
+
+	public Project get_project() {
+		return _project;
+	}
+
+	public void set_project(Project _project) {
+		this._project = _project;
+	}
+
+	private static GeneralInfoModel instance = null;
+	
+	public static GeneralInfoModel getInstance(){
+		if(instance == null){
+			instance = new GeneralInfoModel();
+		}
+		return instance;
+	}
+}

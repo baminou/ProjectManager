@@ -1,0 +1,20 @@
+package app;
+
+import java.util.Date;
+
+public class PCR extends SubProject{
+	
+	private String _platform;
+	private String _labelProtocol;
+	private String _valueDefinition;
+
+	public PCR(int _id, Date _creation_date, String _title, String _species,
+			String _description, Project _project, String _summary,
+			String _overall_design, String _contributors, String _experiment)
+			throws ConventionException {
+		super(_id, _creation_date, _title, _species, _description, _project, _summary,
+				_overall_design, _contributors, _experiment);
+		// TODO Auto-generated constructor stub
+	}	
+
+}
