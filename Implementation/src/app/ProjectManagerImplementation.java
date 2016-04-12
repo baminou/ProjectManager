@@ -63,8 +63,6 @@ public class ProjectManagerImplementation implements ProjectManagerInterface, Se
 		File scratchFolder = new File(scratch);
 		File archiveFolder = new File(archive);
 		
-		
-		
 		//Check if the archive drive exists
 		if(!archiveFolder.exists()){
 			throw new ConventionException("Archive drive doesn't exist. Check the server configurations.");
@@ -74,70 +72,48 @@ public class ProjectManagerImplementation implements ProjectManagerInterface, Se
 		if(!scratchFolder.exists()){
 			throw new ConventionException("Scratch folder doesn't exist on the server.");
 		}
-		
-		/*if(tree.getLastPathComponent().toString().matches(_prop.getProperty("subproject_pattern"))){
-			for(File file : scratchFolder.listFiles()){
-				if(file.isHidden()){
-					throw new ConventionException("This hidden file or directory cannot be synchronized. "+file.getAbsolutePath());
-				}
-				if(!file.isDirectory()){
-					throw new ConventionException("This folder contains a non-valid file. "+file.getAbsolutePath());
-				}
-				if(!file.getName().matches(_prop.getProperty("subproject_pattern"))){
-					throw new ConventionException("This folder does not respect the convention. "+file.getAbsolutePath());
-				}
-			}
-		}
-		
-		String folder_to_sync = tree.getLastPathComponent().toString();
-		if(folder_to_sync.matches(_prop.getProperty("project_pattern"))){
-			File project = new File(scratch);
-			if(!project.exists()) throw new ConventionException(project.getAbsolutePath()+" does not exist on the server.");
-			System.out.println(project.getAbsolutePath());
-			for(File sub_project : project.listFiles()){
-				File metadata_file = new File(sub_project.getAbsolutePath()+"/metadata.xls");
-				File readme_file = new File(sub_project.getAbsolutePath()+"/README");
-				
-				if(!sub_project.getName().matches(_prop.getProperty("subproject_pattern"))){
-					throw new ConventionException(sub_project.getName()+" name does not respect the convention.");
-				}
-				if(!metadata_file.exists()){
-					throw new ConventionException(sub_project.getName()+" - Metadata sheet does not exist.");
-				}
-				if(!readme_file.exists()){
-					throw new ConventionException(sub_project.getName()+" - README file does not exist.");
-				}
-				if(CheckWord("1",readme_file)){
-					SubProject.validatePCR(metadata_file);
-				}
-				
-				if(CheckWord("2",readme_file)){
-					SubProject.validateGeneric(metadata_file);
-				}
-				
-				if(CheckWord("3",readme_file)){
-					SubProject.validateIllumina(metadata_file);
-				}
-				
-				if(CheckWord("4",readme_file)){
-					SubProject.validateSequencing(metadata_file);
-				}
-				
-				if(CheckWord("5",readme_file)){
-					SubProject.validateMicroarray(metadata_file);
-				}
-			}
-		}*/
 
+		//File tmp = new File(archive+"/"+StringUtils.join(Arrays.copyOf(tree.getPath(),tree.getPath().length-1),"/"));
+		//tmp.mkdirs();
+		
+		//If the User wants to transfer the whole project
+		if(scratchFolder.getName().matches(_prop.getProperty("project_pattern"))){
+			File tmp = new File(getArchivePath()+"/"+scratchFolder.getName());
+			tmp.mkdirs();
+			for(File sub_folder : scratchFolder.listFiles()){
+				if(sub_folder.isDirectory()){
+					transfer_subfolder(sub_folder, tmp);
+				}
+			}
+			return;
+		}
 		
 		File tmp = new File(archive+"/"+StringUtils.join(Arrays.copyOf(tree.getPath(),tree.getPath().length-1),"/"));
 		tmp.mkdirs();
-		//System.out.println(tmp.getAbsolutePath());
-		
-		String command = "rsync -aP --chmod=Dug-w --chmod=o-wrx "+scratch+" "+tmp.getAbsolutePath();
-		System.out.println(command);
-		Process proc = Runtime.getRuntime().exec(command);
-		proc.waitFor();
+		transfer_subfolder(scratchFolder, tmp);
+	}
+	
+	void transfer_subfolder(File src, File dest) throws IOException, InterruptedException, ConventionException{
+		if(src.getName().matches(_prop.getProperty("subproject_pattern"))){
+			String command = "rsync -aP --remove-source-files --chmod=Dug-w --chmod=o-wrx "+src.getAbsolutePath()+" "+dest.getAbsolutePath();
+			System.out.println(command);
+			Process proc = Runtime.getRuntime().exec(command);
+			proc.waitFor();
+			if(src.listFiles().length==0){
+				src.delete();
+			}
+			return;
+		}
+		throw new ConventionException(src.getName()+" does not respect the convention.");
+	}
+	
+	boolean isRunning(Process process){
+		try{
+			process.exitValue();
+			return false;
+		}catch(Exception e){
+			return true;
+		}
 	}
 	
 	@Override
