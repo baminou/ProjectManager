@@ -75,7 +75,7 @@ public class ProjectManagerImplementation implements ProjectManagerInterface, Se
 			throw new ConventionException("Scratch folder doesn't exist on the server.");
 		}
 		
-		if(tree.getLastPathComponent().toString().matches(_prop.getProperty("subproject_pattern"))){
+		/*if(tree.getLastPathComponent().toString().matches(_prop.getProperty("subproject_pattern"))){
 			for(File file : scratchFolder.listFiles()){
 				if(file.isHidden()){
 					throw new ConventionException("This hidden file or directory cannot be synchronized. "+file.getAbsolutePath());
@@ -127,15 +127,15 @@ public class ProjectManagerImplementation implements ProjectManagerInterface, Se
 					SubProject.validateMicroarray(metadata_file);
 				}
 			}
-		}
+		}*/
 
 		
 		File tmp = new File(archive+"/"+StringUtils.join(Arrays.copyOf(tree.getPath(),tree.getPath().length-1),"/"));
 		tmp.mkdirs();
-		System.out.println(tmp.getAbsolutePath());
+		//System.out.println(tmp.getAbsolutePath());
 		
-		String command = "rsync -a "+scratch+" "+tmp.getAbsolutePath();
-		//System.out.println(command);
+		String command = "rsync -aP --chmod=Dug-w --chmod=o-wrx "+scratch+" "+tmp.getAbsolutePath();
+		System.out.println(command);
 		Process proc = Runtime.getRuntime().exec(command);
 		proc.waitFor();
 	}
