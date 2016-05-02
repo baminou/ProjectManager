@@ -1,9 +1,0 @@
-package model;
-
-public class SyncModel {
-	
-	public void sendRequest(TreePath[] paths){
-		
-	}
-
-}

@@ -1,23 +1,22 @@
 package app;
 
+import java.io.File;
 import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+
 import javax.swing.tree.TreePath;
+
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
 public interface ProjectManagerInterface extends Remote{
-	public String getScratchDirectory() throws RemoteException, IOException;
-	public String getArchiveDirectory() throws RemoteException, IOException;
-	public String getScratchDrive() throws RemoteException;
-	public String getArchiveDrive() throws RemoteException;
+	public File getScratchDirectory() throws RemoteException, IOException;
+	public File getArchiveDirectory() throws RemoteException, IOException;
 	public FileTree2 getScratchTreeStructure() throws RemoteException;
 	//public FileTree getArchiveTreeStructure() throws RemoteException;
 	public void archivePath(TreePath tree) throws RemoteException, IOException, Exception;
-	public String getScratchPath() throws RemoteException;
-	public String getArchivePath() throws RemoteException;
 	
 	/**
 	 * Create a project folder on the server

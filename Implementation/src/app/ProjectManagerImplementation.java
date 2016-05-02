@@ -40,47 +40,44 @@ public class ProjectManagerImplementation implements ProjectManagerInterface, Se
 	}
 
 	@Override
-	public String getScratchDirectory() throws RemoteException {
-		return _prop.getProperty("scratch_directory");
+	public File getScratchDirectory() throws RemoteException {
+		return new File(_prop.getProperty("scratch_directory"));
 	}
 
 	@Override
-	public String getArchiveDirectory() throws RemoteException {
-		return _prop.getProperty("archive_directory");
+	public File getArchiveDirectory() throws RemoteException {
+		return new File(_prop.getProperty("archive_directory"));
 	}
 
 	@Override
 	public FileTree2 getScratchTreeStructure() throws RemoteException {
-		System.out.println(new File(this.getScratchPath()).getAbsolutePath());
-		return new FileTree2(new File(this.getScratchPath()),2);
-		//return new FileTreeModel(new File(this.getScratchPath()));
+		return new FileTree2(this.getScratchDirectory(),2);
 	}
 
 	@Override
 	public void archivePath(TreePath tree) throws RemoteException, IOException, ConventionException, Exception {
-		String scratch = getScratchDrive()+StringUtils.join(tree.getPath(), "/");
-		String archive = this.getArchiveDrive();
-		File scratchFolder = new File(scratch);
-		File archiveFolder = new File(archive);
+		//Object[] path = (Object[]) java.util.Arrays.copyOfRange(tree.getPath(), 1, tree.getPath().length);
+		File scratch = new File(this.getScratchDirectory().getAbsolutePath()+"/"+StringUtils.join((Object[]) java.util.Arrays.copyOfRange(tree.getPath(), 1, tree.getPath().length), "/"));
+		File archive = this.getArchiveDirectory();
 		
 		//Check if the archive drive exists
-		if(!archiveFolder.exists()){
+		if(!archive.exists()){
 			throw new ConventionException("Archive drive doesn't exist. Check the server configurations.");
 		}
 		
 		//Check if the scratch folder exists
-		if(!scratchFolder.exists()){
+		if(!scratch.exists()){
 			throw new ConventionException("Scratch folder doesn't exist on the server.");
 		}
-
-		//File tmp = new File(archive+"/"+StringUtils.join(Arrays.copyOf(tree.getPath(),tree.getPath().length-1),"/"));
-		//tmp.mkdirs();
+		
+		
 		
 		//If the User wants to transfer the whole project
-		if(scratchFolder.getName().matches(_prop.getProperty("project_pattern"))){
-			File tmp = new File(getArchivePath()+"/"+scratchFolder.getName());
+		if(scratch.getName().matches(_prop.getProperty("project_pattern"))){
+			System.out.println("test");
+			File tmp = new File(getArchiveDirectory()+"/"+scratch.getName());
 			tmp.mkdirs();
-			for(File sub_folder : scratchFolder.listFiles()){
+			for(File sub_folder : scratch.listFiles()){
 				if(sub_folder.isDirectory()){
 					transfer_subfolder(sub_folder, tmp);
 				}
@@ -90,7 +87,7 @@ public class ProjectManagerImplementation implements ProjectManagerInterface, Se
 		
 		File tmp = new File(archive+"/"+StringUtils.join(Arrays.copyOf(tree.getPath(),tree.getPath().length-1),"/"));
 		tmp.mkdirs();
-		transfer_subfolder(scratchFolder, tmp);
+		transfer_subfolder(scratch, tmp);
 	}
 	
 	void transfer_subfolder(File src, File dest) throws IOException, InterruptedException, ConventionException{
@@ -117,34 +114,14 @@ public class ProjectManagerImplementation implements ProjectManagerInterface, Se
 	}
 	
 	@Override
-	public String getScratchDrive() throws RemoteException {
-		return _prop.getProperty("scratch_drive");
-	}
-
-	@Override
-	public String getArchiveDrive() throws RemoteException {
-		return _prop.getProperty("archive_drive");
-	}
-
-	@Override
-	public String getScratchPath() throws RemoteException {
-		return this.getScratchDrive()+this.getScratchDirectory();
-	}
-
-	@Override
-	public String getArchivePath() throws RemoteException {
-		return this.getArchiveDrive()+this.getArchiveDirectory();
-	}
-	
-	@Override
 	public void createScratchDirectory(String path) throws RemoteException{
-		new File(getScratchPath()+"/"+path).mkdirs();
+		new File(getScratchDirectory()+"/"+path).mkdirs();
 	}
 
 	@Override
 	public int createProjectFolder(Project project) throws RemoteException, ConventionException {
 		if(!project.toString().matches(_prop.getProperty("project_pattern"))) throw new ConventionException("Invalid Project name is generated.");
-		new File(getScratchPath()+"/"+project).mkdir();
+		new File(getScratchDirectory()+"/"+project).mkdir();
 		return 1;
 	}
 	@Override
@@ -202,7 +179,7 @@ public class ProjectManagerImplementation implements ProjectManagerInterface, Se
 		createScratchDirectory(folder_name);
 		
 		Workbook template = Workbook.getWorkbook(getClass().getClassLoader().getResourceAsStream("PCR_template.xls"));
-		WritableWorkbook wbCopy = Workbook.createWorkbook(new File(getScratchPath()+"/"+folder_name+"metadata.xls"),template);
+		WritableWorkbook wbCopy = Workbook.createWorkbook(new File(getScratchDirectory()+"/"+folder_name+"metadata.xls"),template);
 		
 		WritableSheet sheet = wbCopy.getSheet("TEMPLATE");
 		
@@ -220,7 +197,7 @@ public class ProjectManagerImplementation implements ProjectManagerInterface, Se
 		wbCopy.write();
 		wbCopy.close();
 		
-		PrintWriter writer = new PrintWriter(getScratchPath()+"/"+folder_name+"README", "UTF-8");
+		PrintWriter writer = new PrintWriter(getScratchDirectory()+"/"+folder_name+"README", "UTF-8");
 		writer.println("1. PCR experiment");
 		writer.close();
 	}
@@ -231,7 +208,7 @@ public class ProjectManagerImplementation implements ProjectManagerInterface, Se
 		createScratchDirectory(folder_name);
 		
 		Workbook template = Workbook.getWorkbook(getClass().getClassLoader().getResourceAsStream("GA_affy.xls"));
-		WritableWorkbook wbCopy = Workbook.createWorkbook(new File(getScratchPath()+"/"+folder_name+"metadata.xls"),template);
+		WritableWorkbook wbCopy = Workbook.createWorkbook(new File(getScratchDirectory()+"/"+folder_name+"metadata.xls"),template);
 		
 		WritableSheet sheet = wbCopy.getSheet("Metadata Template");
 		
@@ -253,7 +230,7 @@ public class ProjectManagerImplementation implements ProjectManagerInterface, Se
 		wbCopy.write();
 		wbCopy.close();
 		
-		PrintWriter writer = new PrintWriter(getScratchPath()+"/"+folder_name+"README", "UTF-8");
+		PrintWriter writer = new PrintWriter(getScratchDirectory()+"/"+folder_name+"README", "UTF-8");
 		writer.println("2. Generic Microarray experiment");
 		writer.close();
 	}
@@ -264,7 +241,7 @@ public class ProjectManagerImplementation implements ProjectManagerInterface, Se
 		createScratchDirectory(folder_name);
 		
 		Workbook template = Workbook.getWorkbook(getClass().getClassLoader().getResourceAsStream("GA_illumina.xls"));
-		WritableWorkbook wbCopy = Workbook.createWorkbook(new File(getScratchPath()+"/"+folder_name+"metadata.xls"),template);
+		WritableWorkbook wbCopy = Workbook.createWorkbook(new File(getScratchDirectory()+"/"+folder_name+"metadata.xls"),template);
 		
 		WritableSheet sheet = wbCopy.getSheet("Metadata Template");
 		
@@ -285,7 +262,7 @@ public class ProjectManagerImplementation implements ProjectManagerInterface, Se
 		wbCopy.write();
 		wbCopy.close();
 		
-		PrintWriter writer = new PrintWriter(getScratchPath()+"/"+folder_name+"README", "UTF-8");
+		PrintWriter writer = new PrintWriter(getScratchDirectory()+"/"+folder_name+"README", "UTF-8");
 		writer.println("3. Illumina experiment");
 		writer.close();
 	}
@@ -296,7 +273,7 @@ public class ProjectManagerImplementation implements ProjectManagerInterface, Se
 		createScratchDirectory(folder_name);
 		
 		Workbook template = Workbook.getWorkbook(getClass().getClassLoader().getResourceAsStream("seq_template.xls"));
-		WritableWorkbook wbCopy = Workbook.createWorkbook(new File(getScratchPath()+"/"+folder_name+"metadata.xls"),template);
+		WritableWorkbook wbCopy = Workbook.createWorkbook(new File(getScratchDirectory()+"/"+folder_name+"metadata.xls"),template);
 		
 		WritableSheet sheet = wbCopy.getSheet("TEMPLATE");
 
@@ -316,7 +293,7 @@ public class ProjectManagerImplementation implements ProjectManagerInterface, Se
 		wbCopy.write();
 		wbCopy.close();// TODO Auto-generated method stub
 		
-		PrintWriter writer = new PrintWriter(getScratchPath()+"/"+folder_name+"README", "UTF-8");
+		PrintWriter writer = new PrintWriter(getScratchDirectory()+"/"+folder_name+"README", "UTF-8");
 		writer.println("4. Sequencing experiment");
 		writer.close();
 	}
@@ -329,7 +306,7 @@ public class ProjectManagerImplementation implements ProjectManagerInterface, Se
 		createScratchDirectory(folder_name);
 		
 		Workbook template = Workbook.getWorkbook(getClass().getClassLoader().getResourceAsStream("GA_affy.xls"));
-		WritableWorkbook wbCopy = Workbook.createWorkbook(new File(getScratchPath()+"/"+folder_name+"metadata.xls"),template);
+		WritableWorkbook wbCopy = Workbook.createWorkbook(new File(getScratchDirectory()+"/"+folder_name+"metadata.xls"),template);
 		
 		WritableSheet sheet = wbCopy.getSheet("Metadata Template");
 		
@@ -350,7 +327,7 @@ public class ProjectManagerImplementation implements ProjectManagerInterface, Se
 		wbCopy.write();
 		wbCopy.close();
 		
-		PrintWriter writer = new PrintWriter(getScratchPath()+"/"+folder_name+"README", "UTF-8");
+		PrintWriter writer = new PrintWriter(getScratchDirectory()+"/"+folder_name+"README", "UTF-8");
 		writer.println("5. Microarray experiment");
 		writer.close();
 	}

@@ -1,7 +1,0 @@
-package controller;
-
-public class SelectExistingProjectController {
-	
-	private SelectExistingProjectModel _model;
-
-}

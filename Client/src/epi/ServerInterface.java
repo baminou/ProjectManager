@@ -37,8 +37,8 @@ public class ServerInterface {
 		_port = Integer.valueOf(prop.getProperty("port"));
 		_registry = LocateRegistry.getRegistry(prop.getProperty("ip"),Integer.valueOf(prop.getProperty("port")));
 		_stub = (ProjectManagerInterface) _registry.lookup("project_manager");
-		_scratch_directory = _stub.getScratchPath();
-		_archive_directory = _stub.getArchivePath();
+		_scratch_directory = _stub.getScratchDirectory().getAbsolutePath();
+		_archive_directory = _stub.getArchiveDirectory().getAbsolutePath();
 	}
 	
 	public void sync_files(TreePath[] paths) throws RemoteException, IOException, NotBoundException, Exception{

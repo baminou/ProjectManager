@@ -3,9 +3,9 @@ port=2003
 username=epi_admin
 password=hj2AD$$A4d
 archive_drive=/mnt/dell/apetronis/SBS_USER
-scratch_drive=/SCRATCH/SBS_USER
+scratch_drive=/EPIGENETICS/SCRATCH/SBS_USER
 archive_directory=/mnt/dell/apetronis/SBS_USER
-scratch_directory=/SCRATCH/SBS_USER
+scratch_directory=/EPIGENETICS/SCRATCH/SBS_USER
 
 project_pattern=[A-Z]{1}[a-zA-Z]+_[1-9][0-9][0-9][0-9]_[0-9][0-9][0-9]
 project_pattern_title=[A-Z]{1}[a-zA-Z]+

@@ -30,7 +30,6 @@ public class FileTree2 implements Serializable {
 	}
 	
 	private static void show(Node root){
-		System.out.println(root.get_file().getName());
 		for(Node node : root.get_children()){
 			show(node);
 		}

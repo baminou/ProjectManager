@@ -1,7 +1,0 @@
-package epi;
-
-public interface GeneralInfoObserver extends Resetable {
-	public abstract void experimentListChange(int index, String value);
-	public abstract void disable();
-	public abstract void enable();
-}

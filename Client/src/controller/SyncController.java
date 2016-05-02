@@ -2,13 +2,9 @@ package controller;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
-
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeModel;
-import javax.swing.tree.TreeNode;
-
 import app.FileTree2;
 import epi.ServerInterface;
 import view.SyncView;

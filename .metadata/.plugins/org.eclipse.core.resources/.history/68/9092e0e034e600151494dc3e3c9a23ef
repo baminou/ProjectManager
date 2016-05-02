@@ -1,7 +1,0 @@
-package app;
-
-public class Illumina {
-	private String _labelProtocol;
-	private String _scanProtocol;
-	
-}

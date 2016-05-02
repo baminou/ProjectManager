@@ -109,7 +109,6 @@ public class SpecificProjectView extends JPanel {
 		_labelProtocolTxtArea.setBorder(new EmptyBorder(1, 1, 1, 1));
 		_labelProtocolTxtArea.setFont(new Font("Arial", Font.PLAIN, 12));
 		_labelProtocolTxtArea.setToolTipText("Describe the protocol used to label the extract.");
-		_labelProtocolTxtArea.setLineWrap(true);
 		_labelProtocolLbl.setFont(new Font("Arial", Font.PLAIN, 12));
 		_labelProtocolLbl.setHorizontalAlignment(SwingConstants.RIGHT);
 		_labelProtocolLbl.setToolTipText("Describe the protocol used to label the extract.");

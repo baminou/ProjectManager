@@ -1,9 +1,0 @@
-package epi;
-
-import controller.GeneralInfoController;
-import controller.SpecificProjectController;
-
-public abstract class SubProject {
-
-	
-}

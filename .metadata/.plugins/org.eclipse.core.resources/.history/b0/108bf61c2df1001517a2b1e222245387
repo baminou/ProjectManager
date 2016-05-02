@@ -1,7 +1,0 @@
-package app;
-
-public class ConventionException extends Exception {
-	public ConventionException(String message){
-		super("Convention - "+message);
-	}
-}

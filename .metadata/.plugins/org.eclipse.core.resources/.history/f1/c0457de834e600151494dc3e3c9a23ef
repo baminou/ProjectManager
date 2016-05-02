@@ -1,8 +1,0 @@
-package app;
-
-public class Illumina {
-	private String _labelProtocol;
-	private String _scanProtocol;
-	private String _matrixProcessed;
-	private String _matrixSignal;
-}

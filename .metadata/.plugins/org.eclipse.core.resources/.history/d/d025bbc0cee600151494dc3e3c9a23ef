@@ -1,9 +1,0 @@
-package app;
-
-public class Sequencing extends SubProject {
-	private String _libraryConstruction;
-	private String _genomeBuild;
-	private String _processedData;
-	
-	
-}
